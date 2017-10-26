@@ -19,8 +19,8 @@ app.use(bodyParser.json())
 // ROUTES
 
 app.get('/', (req, res) => {
-  res.send("Hello, world.")
-})
+  res.send("Hello, world.");
+});
 
 // Connect to Facebook
 app.get('/webhook/', (req, res) => {

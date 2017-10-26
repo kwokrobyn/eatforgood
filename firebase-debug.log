@@ -1,0 +1,35 @@
+[debug] [2017-10-26T04:11:57.793Z] ----------------------------------------------------------------------
+[debug] [2017-10-26T04:11:57.797Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2017-10-26T04:11:57.797Z] CLI Version:   3.13.1
+[debug] [2017-10-26T04:11:57.797Z] Platform:      darwin
+[debug] [2017-10-26T04:11:57.797Z] Node Version:  v8.0.0
+[debug] [2017-10-26T04:11:57.798Z] Time:          Thu Oct 26 2017 00:11:57 GMT-0400 (EDT)
+[debug] [2017-10-26T04:11:57.798Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-10-26T04:11:57.817Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-10-26T04:11:57.817Z] > authorizing via signed-in user
+[debug] [2017-10-26T04:11:57.820Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/eatforgoodduke  
+ Thu Oct 26 2017 00:11:57 GMT-0400 (EDT)
+[debug] [2017-10-26T04:11:58.264Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-26T04:11:58.266Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/eatforgoodduke/tokens  
+ Thu Oct 26 2017 00:11:58 GMT-0400 (EDT)
+[debug] [2017-10-26T04:11:58.679Z] <<< HTTP RESPONSE 200
+[info] 1
+[info] 
+[info] === Deploying to 'eatforgoodduke'...
+[info] 
+[info] i  deploying hosting
+[info] i  hosting: preparing server directory for upload...
+[debug] [2017-10-26T04:11:59.528Z] TypeError: no files or directories specified
+    at Object.module.exports (/usr/local/lib/node_modules/firebase-tools/node_modules/tar/lib/create.js:19:11)
+    at module.exports (/usr/local/lib/node_modules/firebase-tools/lib/prepareUpload.js:21:14)
+    at module.exports (/usr/local/lib/node_modules/firebase-tools/lib/deploy/hosting/deploy.js:23:10)
+    at _chain (/usr/local/lib/node_modules/firebase-tools/lib/deploy/index.js:22:45)
+    at /usr/local/lib/node_modules/firebase-tools/lib/deploy/index.js:73:12
+    at tryCatch (/usr/local/lib/node_modules/firebase-tools/node_modules/rsvp/dist/rsvp.js:525:12)
+    at invokeCallback (/usr/local/lib/node_modules/firebase-tools/node_modules/rsvp/dist/rsvp.js:538:13)
+    at /usr/local/lib/node_modules/firebase-tools/node_modules/rsvp/dist/rsvp.js:606:14
+    at flush (/usr/local/lib/node_modules/firebase-tools/node_modules/rsvp/dist/rsvp.js:2415:5)
+    at _combinedTickCallback (internal/process/next_tick.js:95:7)
+[error] 
+[error] Error: An unexpected error has occurred.
