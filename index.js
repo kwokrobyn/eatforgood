@@ -4,6 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const dotenv = require('dotenv')
+const path = require('path');
 
 // Configure .env path
 dotenv.load({path: '.env'})
@@ -34,7 +35,7 @@ app.get('/webhook/', (req, res) => {
   if (mode && token) {
 
     // Checks the mode and token sent is correct
-    if (mode == 'subscribe' && token === 'hello') {
+    if (mode == 'subscribe' && token == process.env.VERIFY_TOKEN) {
 
       // Responds with the challenge token from the request
       console.log('WEBHOOK_VERIFIED');
