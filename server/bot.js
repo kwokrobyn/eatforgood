@@ -110,7 +110,7 @@ module.exports = {
                 "payload":"<STRING_SENT_TO_WEBHOOK>"
               },
               {
-                "content_type":"text"
+                "content_type":"text",
                 "title":"2",
                 "payload":"<STRING_SENT_TO_WEBHOOK>"
               },
