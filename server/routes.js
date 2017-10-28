@@ -2,7 +2,9 @@ const express = require('express')
 const accesstoken = "EAAXqgZAW0uwoBAJ0ZCtrVdF07EN0ZAx3EeZAWZBQdi4TRvo29qNLZCDiiQurLKuy43mqpkDQrTMMcu1LpcOlYIkpiluUeyPGCKXd9qt644DlsTB168D673TWaezOvcqVmUhgjgAreZC9dT7RjMlllYipxlsDfnq18qD5wpastC6kwZDZD"
 const request = require('request')
 const bot = require('./bot')
-const db = require('./db')
+
+const firebase = require('./firebase');
+const db = firebase.database();
 
 // import router
 const router = express.Router();
@@ -42,24 +44,42 @@ router.post('/webhook/', (req, res) => {
 
   let messaging_events = req.body.entry[0].messaging
 
-  let step = 0
   for (let i = 0; i < messaging_events.length; i++) {
     let event = req.body.entry[0].messaging[i]
     let sender = event.sender.id
     if (event.message && event.message.text) {
       let text = event.message.text;
-        if (step == 0) {
-          bot.welcome(sender);
-          bot.setHealthGoal(sender);
-          step += 1
-          continue
+
+      // get referene for user from db
+      const userRef = db.ref('users/'+ userID);
+      userRef.once("value", (snapshot) => {
+        // if user does not exist
+        if (snapshot.val() == null) {
+          userRef.set({
+            snackLimit: 0,
+            healthGoal: 0,
+            totalAverage: 0,
+            weeklyAverage: 0,
+            dailyAverage: 0
+            // meals: JSON, only implement when first meal added
+            // snacks: JSON, only implement when first snack added
+          }).then(() => {
+            bot.welcome(sender);
+            bot.setHealthGoal(sender);
+          })
         }
 
-        if (step == 1) {
-          bot.setSnackLimit(sender);
-          step += 1
-          continue 
+        // if user exists
+        else {
+          const healthGoalRef = db.ref('users/' + userID + '/healthGoal');
+          healthGoalRef.once("value", (snapshot) => {
+            if (snapshot.val() == 0) {
+              bot.setSnackLimit(sender);
+            }
+          })
         }
+
+      });
 
 
     } else {
