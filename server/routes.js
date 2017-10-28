@@ -51,7 +51,7 @@ router.post('/webhook/', (req, res) => {
       let text = event.message.text;
 
       // get referene for user from db
-      const userRef = db.ref('users/'+ userID);
+      const userRef = db.ref('users/'+ sender);
       userRef.once("value", (snapshot) => {
         // if user does not exist
         if (snapshot.val() == null) {
@@ -71,7 +71,7 @@ router.post('/webhook/', (req, res) => {
 
         // if user exists
         else {
-          const healthGoalRef = db.ref('users/' + userID + '/healthGoal');
+          const healthGoalRef = db.ref('users/' + sender + '/healthGoal');
           healthGoalRef.once("value", (snapshot) => {
             if (snapshot.val() == 0) {
               bot.setSnackLimit(sender);
