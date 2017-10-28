@@ -26,8 +26,17 @@ module.exports = {
     const userRef = db.ref('users/' + user.id);
     userRef.once("value", (snapshot) => {
       userRef.set({
-        snackLimit: snackLimit 
-      })
+        snackLimit: snackLimit
+      });
+    })
+  },
+
+  setHealthGoal: (user, healthGoal) => {
+    const userRef = db.ref('users/' + user.id);
+    userRef.once("value", (snapshot) => {
+      userRef.set({
+        healthGoal: healthGoal
+      });
     })
   }
 
