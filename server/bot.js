@@ -36,6 +36,7 @@ module.exports = {
                   grade each of your meals on how healthy they are, on a scale from \
                   1 to 10, with 1 being extremely unhealthy, like deep fried ice cream, \
                   and 10 being extremely healthy, like an organic, free-range, non-GMO salad without dressing!"}
+      console.log('Printed first welcome statement')
       module.exports.sendMessage(sender, welcMsgData)
     },
 
@@ -90,6 +91,7 @@ module.exports = {
               }
             ]
         }
+      console.log('showing button choices for health goal')
       module.exports.sendMessage(sender, messageData)
     },
 
@@ -108,7 +110,7 @@ module.exports = {
                 "payload":"<STRING_SENT_TO_WEBHOOK>"
               },
               {
-                "content_type":"text",
+                "content_type":"text"
                 "title":"2",
                 "payload":"<STRING_SENT_TO_WEBHOOK>"
               },
@@ -149,6 +151,7 @@ module.exports = {
               }
             ]
         }
+      console.log('showing snack limit')
       module.exports.sendMessage(sender, messageData)
     }
 }
