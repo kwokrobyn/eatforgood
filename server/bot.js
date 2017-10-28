@@ -27,12 +27,6 @@ module.exports = {
          console.log('Error: ', response.body.error)
        }
      })
-<<<<<<< HEAD
-     
-  }, // END OF SENDTEXT
-
-
-=======
   }, // END OF SENDTEXT
 
   welcome: (sender) => {
@@ -45,7 +39,6 @@ module.exports = {
       console.log('Printed first welcome statement')
       module.exports.sendMessage(sender, welcMsgData)
     },
->>>>>>> master
 
     setHealthGoal: (sender) =>{
         let messageData = {

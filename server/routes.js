@@ -47,6 +47,8 @@ router.post('/webhook/', (req, res) => {
     if (event.message && event.message.text) {
       let text = event.message.text
 
+      console.log(db.getUser(sender));
+
       // if user not in db
       if(true){
         bot.welcome(sender)
