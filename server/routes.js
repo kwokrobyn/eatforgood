@@ -41,46 +41,15 @@ router.get('/webhook/', (req, res) => {
 router.post('/webhook/', (req, res) => {
 
   let messaging_events = req.body.entry[0].messaging
-  let welcomeState = 1 // integers for 3 states -> 0:not welcome, 1:first loop w/ welcome, 2:2nd loop w/ newHealthGoal, 3: 3rd loop w/ newSnackLimit
-  let newHealthGoal = false
-  let newSnackLimit = false
-"""
+
+
   for (let i = 0; i < messaging_events.length; i++) {
     let event = req.body.entry[0].messaging[i]
     let sender = event.sender.id
     if (event.message && event.message.text) {
-      let text = event.message.text
+      let text = event.message.text;
 
-      console.log(db.getUser(sender));
-
-      // if user not in db
-      if(welcomeState == 1){
-        let currentUser = -1
-        if(currentUser == -1){
-          welcomeState = 2
-          bot.welcome(sender)
-        }
-        else{
-          welcomeState = 0
-          continue
-        }
-      }
-
-      bot.sendMessage(sender, {'text': welcomeState})
-
-      if(welcomeState == 2){
-        bot.newHealthGoal(sender)
-        welcomeState = 3
-        newHealthGoal = false
-      }
-
-      if(newSnackLimit || welcomeState == 3){
-        bot.newSnackLimit(sender)
-        welcomeState = 0
-        newSnackLimit = false
-        continue
-      }
-      //bot.sendText(sender, "Text echo: " + text.substring(0,100))
+      bot.sendMessage(sender, db.getUser(sender));
 
     } else {
       // Returns a '404 Not Found' if event is not from a page subscription
@@ -88,7 +57,7 @@ router.post('/webhook/', (req, res) => {
     }
   }
 
-  """
+
     // Returns a '200 OK' response to all requests
     res.status(200).send('EVENT_RECEIVED');
 });
