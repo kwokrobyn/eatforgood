@@ -74,14 +74,14 @@ router.post('/webhook/', (req, res) => {
           // curr is healthGoal, set it
           if (snapshot.val().healthGoal == 0) {
 
-            userRef.set({
+            userRef.update({
               healthGoal: text
             })
             bot.setSnackLimit(sender);
             // curr is snackLimit, set it
           } else {
 
-            userRef.set({
+            userRef.update({
               snackLimit: text
             })
 
