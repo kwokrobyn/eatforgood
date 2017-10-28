@@ -2,8 +2,8 @@ const firebase = require('./firebase');
 const db = firebase.database();
 
 module.exports = {
-  getUser: (user) => {
-    const userRef = db.ref('users/'+ user.id);
+  getUser: (userID) => {
+    const userRef = db.ref('users/'+ userID);
     userRef.once("value", (snapshot) => {
       if (snapshot.val() == null) {
         userRef.set({
