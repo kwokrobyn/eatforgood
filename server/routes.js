@@ -45,16 +45,13 @@ router.post('/webhook', (req, res) => {
     if (event.message && event.message.text) {
       let text = event.message.text
       sendText(sender, "Text echo: " + text)
+    } else {
+      // Returns a '404 Not Found' if event is not from a page subscription
+      res.sendStatus(404);
     }
   }
-
     // Returns a '200 OK' response to all requests
     res.status(200).send('EVENT_RECEIVED');
-  } else {
-    // Returns a '404 Not Found' if event is not from a page subscription
-    res.sendStatus(404);
-  }
-
 });
 
 sendText: (sender, text) => {
