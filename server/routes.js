@@ -65,6 +65,7 @@ router.post('/webhook/', (req, res) => {
             // snacks: JSON, only implement when first snack added
           }).then(() => {
             bot.welcome(sender);
+          }).then(() => {
             bot.setHealthGoal(sender);
           })
         }
