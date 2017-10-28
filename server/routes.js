@@ -47,10 +47,14 @@ router.post('/webhook/', (req, res) => {
     if (event.message && event.message.text) {
       let text = event.message.text
 
-      console.log(db.getUser(sender));
+      // if user not in db
+      if(true){
+        bot.welcome(sender)
+        bot.setHealthGoal(sender)
+        bot.setSnackLimit(sender)
+      }
+      //bot.sendText(sender, "Text echo: " + text.substring(0,100))
 
-
-      bot.sendText(sender, "Text echo: " + text.substring(0,100))
     } else {
       // Returns a '404 Not Found' if event is not from a page subscription
       res.sendStatus(404);
