@@ -36,15 +36,15 @@ router.get('/webhook/', (req, res) => {
 
 // Handles POSTS to webhook
 // Creates the endpoint for our webhook
-router.post('/webhook', (req, res) => {
+router.post('/webhook/', (req, res) => {
 
-  let messenging_events = req.body.entry[0].messaging_events
+  let messaging_events = req.body.entry[0].messaging
   for (let i = 0; i < messaging_events.length; i++) {
-    let event = messaging_events[i]
-    let sender = event.sender.id
+    let event = req.body.entry[0].messaging[i]
+    let sender = event.sender.id.toString();
     if (event.message && event.message.text) {
       let text = event.message.text
-      sendText(sender, "Text echo: " + text)
+      sendText(sender, "Text echo: " + text.substring(0,100))
     } else {
       // Returns a '404 Not Found' if event is not from a page subscription
       res.sendStatus(404);
@@ -55,6 +55,7 @@ router.post('/webhook', (req, res) => {
 });
 
 sendText: (sender, text) => {
+  console.log('hi');
   let messageData = {
     text: text
   }
