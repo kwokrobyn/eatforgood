@@ -44,6 +44,7 @@ router.post('/webhook/', (req, res) => {
   let welcomeState = 1 // integers for 3 states -> 0:not welcome, 1:first loop w/ welcome, 2:2nd loop w/ newHealthGoal, 3: 3rd loop w/ newSnackLimit
   let newHealthGoal = false
   let newSnackLimit = false
+"""
   for (let i = 0; i < messaging_events.length; i++) {
     let event = req.body.entry[0].messaging[i]
     let sender = event.sender.id
@@ -86,6 +87,8 @@ router.post('/webhook/', (req, res) => {
       res.sendStatus(404);
     }
   }
+
+  """
     // Returns a '200 OK' response to all requests
     res.status(200).send('EVENT_RECEIVED');
 });
