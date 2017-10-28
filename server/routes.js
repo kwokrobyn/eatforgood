@@ -58,7 +58,6 @@ router.post('/webhook/', (req, res) => {
         if(currentUser == -1){
           bot.welcome(sender)
           welcomeState = 2
-          continue
         }
         else{
           welcomeState = 0
@@ -70,7 +69,6 @@ router.post('/webhook/', (req, res) => {
         bot.newHealthGoal(sender)
         welcomeState = 3
         newHealthGoal = false
-        continue
       }
 
       if(newSnackLimit || welcomeState == 3){
