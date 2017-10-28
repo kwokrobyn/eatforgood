@@ -65,19 +65,28 @@ router.post('/webhook/', (req, res) => {
             // snacks: JSON, only implement when first snack added
           }).then(() => {
             bot.welcome(sender);
-          }).then(() => {
             bot.setHealthGoal(sender);
           })
         }
 
         // if user exists
         else {
-          const healthGoalRef = db.ref('users/' + sender + '/healthGoal');
-          healthGoalRef.once("value", (snapshot) => {
-            if (snapshot.val() == 0) {
-              bot.setSnackLimit(sender);
-            }
-          })
+          // curr is healthGoal, set it
+          if (snapshot.val().healthGoal == 0) {
+
+            userRef.set({
+              healthGoal: text
+            })
+            bot.setSnackLimit(sender);
+            // curr is snackLimit, set it
+          } else {
+
+            userRef.set({
+              snackLimit: text
+            })
+
+          }
+
         }
 
       });
