@@ -44,7 +44,7 @@ router.post('/webhook/', (req, res) => {
     let sender = event.sender.id.toString();
     if (event.message && event.message.text) {
       let text = event.message.text
-      sendText(sender, "Text echo: " + text.substring(0,100))
+      self.sendText(sender, "Text echo: " + text.substring(0,100))
     } else {
       // Returns a '404 Not Found' if event is not from a page subscription
       res.sendStatus(404);
