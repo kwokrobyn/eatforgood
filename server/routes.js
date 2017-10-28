@@ -42,14 +42,25 @@ router.post('/webhook/', (req, res) => {
 
   let messaging_events = req.body.entry[0].messaging
 
-
+  let step = 0
   for (let i = 0; i < messaging_events.length; i++) {
     let event = req.body.entry[0].messaging[i]
     let sender = event.sender.id
     if (event.message && event.message.text) {
       let text = event.message.text;
+        if (step == 0) {
+          bot.welcome(sender);
+          bot.setHealthGoal(sender);
+          step += 1
+          continue
+        }
 
-      bot.sendMessage(sender, {'text':db.getUser(sender)});
+        if (step == 1) {
+          bot.setSnackLimit(sender);
+          step += 1
+          continue 
+        }
+
 
     } else {
       // Returns a '404 Not Found' if event is not from a page subscription
