@@ -30,7 +30,9 @@ module.exports = {
          console.log('Error: ', response.body.error)
        }
      })
-  } // END OF SENDTEXT 
+  }, // END OF SENDTEXT
+
+  
 
 
 }
