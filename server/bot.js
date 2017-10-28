@@ -30,12 +30,12 @@ module.exports = {
   }, // END OF SENDTEXT
 
   welcome: (sender) => {
-      let welctext = "Hi, I'm world-renowned nutrionist and health guru, Scott Heng! \
+      let welcMsgData = {"text": "Hi, I'm world-renowned nutrionist and health guru, Scott Heng! \
                   I'm here to help you reach your goal of being a healthy eater! \
                   We'll be keeping track of your meals every day, and you will \
                   grade each of your meals on how healthy they are, on a scale from \
                   1 to 10, with 1 being extremely unhealthy, like deep fried ice cream, \
-                  and 10 being extremely healthy, like an organic, free-range, non-GMO salad without dressing!"
+                  and 10 being extremely healthy, like an organic, free-range, non-GMO salad without dressing!"}
       module.exports.sendMessage(sender, welcMsgData)
     },
 
