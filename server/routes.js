@@ -56,8 +56,8 @@ router.post('/webhook/', (req, res) => {
       if(welcomeState == 1){
         let currentUser = -1
         if(currentUser == -1){
-          bot.welcome(sender)
           welcomeState = 2
+          bot.welcome(sender)
         }
         else{
           welcomeState = 0
@@ -67,7 +67,7 @@ router.post('/webhook/', (req, res) => {
 
       bot.sendMessage(sender, {'text': welcomeState})
 
-      if(newHealthGoal || welcomeState == 2){
+      if(welcomeState == 2){
         bot.newHealthGoal(sender)
         welcomeState = 3
         newHealthGoal = false
