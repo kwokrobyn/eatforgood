@@ -95,11 +95,11 @@ router.post('/webhook/', (req, res) => {
                 continue
               if (payload.category == "Meal") {
                 if(payload.name == ""){
-                  //add name
+                  bot.selectOption(sender);
                   continue
                 }
                 else if (payload.score == 0){
-                  //add score
+                  bot.selectOption(sender, payload.name);
                   continue
                 }
                 else {

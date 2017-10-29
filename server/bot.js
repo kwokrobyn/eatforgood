@@ -184,5 +184,72 @@ module.exports = {
           ]
         }
       module.exports.sendMessage(sender, messageData)
+    },
+
+    addMealName: (sender) => {
+      let messageData = {}
+    },
+
+    addMealScore: (sender, mealName) => {
+      let messsageData = {
+          "text":"Give your meal a health score!",
+          "quick_replies":[
+            {
+              "content_type":"text",
+              "title":"0",
+              "payload":{"name":mealName, "score":0}
+            },
+            {
+              "content_type":"text",
+              "title":"1",
+              "payload":{"name":mealName, "score":1}
+            },
+            {
+              "content_type":"text",
+              "title":"2",
+              "payload":{"name":mealName, "score":2}
+            },
+            {
+              "content_type":"text",
+              "title":"3",
+              "payload":{"name":mealName, "score":3}
+            },
+            {
+              "content_type":"text",
+              "title":"4",
+              "payload":{"name":mealName, "score":4}
+            },
+            {
+              "content_type":"text",
+              "title":"5",
+              "payload":{"name":mealName, "score":5}
+            },
+            {
+              "content_type":"text",
+              "title":"6",
+              "payload":{"name":mealName, "score":6}
+            },
+            {
+              "content_type":"text",
+              "title":"7",
+              "payload":{"name":mealName, "score":7}
+            },
+            {
+              "content_type":"text",
+              "title":"8",
+              "payload":{"name":mealName, "score":8}
+            },
+            {
+              "content_type":"text",
+              "title":"9",
+              "payload":{"name":mealName, "score":9}
+            },
+            {
+              "content_type":"text",
+              "title":"10",
+              "payload":{"name":mealName, "score":10}
+            }
+          ]
+        }
     }
 }
