@@ -51,12 +51,6 @@ router.post('/webhook/', (req, res) => {
     if (event.message && event.message.text) {
       let text = event.message.text;
       let payload = event.message.payload;
-      if (i > 0) {
-        let prevMessage = req.body.entry[0].messaging[i-1].message;
-        bot.sendMessage(sender, prevMessage)
-      } else {
-        let prevMessage = -100;
-      }
 
 
       // get referene for user from db
@@ -69,6 +63,9 @@ router.post('/webhook/', (req, res) => {
             snackLimit: 0,
             healthGoal: 0,
             totalAverage: 0,
+            goalsSet: false,
+            currentlySetting: 'none',
+            currentString: 'hi',
             weeklyAverage: 0,
             dailyAverage: 0,
             snacks: -10
@@ -80,65 +77,93 @@ router.post('/webhook/', (req, res) => {
 
         // if user exists
         else {
-          // curr is healthGoal, set it
-          if (snapshot.val().healthGoal == 0) {
+          if (snapshot.val().goalsSet == false) {
+            // curr is healthGoal, set it
+            if (snapshot.val().healthGoal == 0) {
 
-            userRef.update({
-              healthGoal: text
-            })
-            bot.setSnackLimit(sender);
-            // curr is snackLimit, set it
-          } else if (snapshot.val().snackLimit == 0) {
+              userRef.update({
+                healthGoal: text
+              })
+              bot.setSnackLimit(sender);
+              // curr is snackLimit, set it
+            } else if (snapshot.val().snackLimit == 0) {
 
-            userRef.update({
-              snackLimit: text
-            })
-            bot.selectOption(sender);
-
-          } else {
-
-            if (i > 0 && prevMessage.payload.category == "Meal") {
-              // if previous message is selectOption answer and current message is meal string
-              if (prevMessage.payload.score == 0) {
-                bot.addMealScore(sender, text);
-              }
+              userRef.update({
+                snackLimit: text,
+                goalsSet: true
+              })
+              bot.selectOption(sender);
+          } else { // goalsSet == true, event = Meal or Snack
+            if (text.toLowerCase() == "Meal") {
+              userRef.update({
+                currentlySetting: 'mealname'
+              })
+              bot.addMealName(sender);
             }
 
-            if (payload != null) {
-
-              if (payload.category == null) {
-                bot.selectOption(sender);
-
-              if (payload.category == "Meal") {
-                if(payload.name == ""){
-                  bot.addMealName(sender);
-                }
-                // else if (payload.score == 0){
-                //   bot.addMealScore(sender, payload.name);
-                // }
-                else {
-                  const uid = uuid.v4();
-                  const mealRef = db.ref('users/' + sender + '/meals/' + uid);
-
-                  //db add object
-                  mealRef.set({
-                    name: payload.name,
-                    score: payload.score
-                  })
-
-                  //report average score, vs goal
-
-                }
-              }
-              if (payload.category == "Snack") {
-                // get value from db, decrement
-                // if snackCounter <= 0, public shaming
-              }
+            if (snapshot.val().currentlySetting == 'mealname') {
+              userRef.update({
+                currentlySetting: 'mealscore'
+              })
+              bot.addMealScore(sender, snapshot.val().currentString);
             }
 
-              }
+            if (snapshot.val().currentlySetting == 'mealscore') {
+              const uid = uuid.v4();
+              const mealRef = db.ref('users/' + sender + '/meals/' + uid);
+
+              //db add object
+              mealRef.set({
+                name: payload.name,
+                score: payload.score
+              })
             }
+
           }
+
+        } // end of goals not set
+      } // end of else
+
+            // if (i > 0 && prevMessage.payload.category == "Meal") {
+            //   // if previous message is selectOption answer and current message is meal string
+            //   if (prevMessage.payload.score == 0) {
+            //     bot.addMealScore(sender, text);
+            //   }
+            // }
+            //
+            // if (payload != null) {
+            //
+            //   if (payload.category == null) {
+            //     bot.selectOption(sender);
+            //
+            //   if (payload.category == "Meal") {
+            //     if(payload.name == ""){
+            //       bot.addMealName(sender);
+            //     }
+            //     // else if (payload.score == 0){
+            //     //   bot.addMealScore(sender, payload.name);
+            //     // }
+            //     else {
+            //       const uid = uuid.v4();
+            //       const mealRef = db.ref('users/' + sender + '/meals/' + uid);
+            //
+            //       //db add object
+            //       mealRef.set({
+            //         name: payload.name,
+            //         score: payload.score
+            //       })
+            //
+            //       //report average score, vs goal
+            //
+            //     }
+            //   }
+            //   if (payload.category == "Snack") {
+            //     // get value from db, decrement
+            //     // if snackCounter <= 0, public shaming
+            //   }
+            // }
+            //
+            //   }
 
 
 
