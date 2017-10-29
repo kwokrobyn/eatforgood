@@ -157,12 +157,19 @@ module.exports = {
             {
               "content_type":"text",
               "title":"Meal",
-              "payload":"Add Meal"
+              "payload": {
+                "category": "Meal",
+                "name": "",
+                "score": 0
+              }
             },
             {
               "content_type":"text",
               "title":"Snack",
-              "payload":"Decrement Snack"
+              "payload": {
+                "category": "Snack",
+                "name": ""
+              }
             }
           ]
         }

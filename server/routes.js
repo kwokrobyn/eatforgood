@@ -89,7 +89,22 @@ router.post('/webhook/', (req, res) => {
             bot.selectOption(sender);
 
           } else {
-            bot.selectOption(sender);
+
+            if (payload != null) {
+              if (payload.category == "Meal") {
+                
+              }
+            }
+
+            if (payload.category == null) {
+              bot.selectOption(sender);
+            } else if (payload.category == "Meal") {
+              if (payload.name == "") {
+                // input name
+              } else if {
+
+              }
+            }
           }
 
         }
