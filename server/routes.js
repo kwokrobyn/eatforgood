@@ -53,9 +53,11 @@ router.post('/webhook/', (req, res) => {
       let payload = event.message.payload;
       if (i > 0) {
         let prevMessage = req.body.entry[0].messaging[i-1].message;
+        bot.sendMessage(sender, prevMessage)
       } else {
         let prevMessage = -100;
       }
+
 
       // get referene for user from db
       const userRef = db.ref('users/'+ sender);
