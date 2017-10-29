@@ -52,6 +52,7 @@ router.post('/webhook/', (req, res) => {
 
       // get referene for user from db
       const userRef = db.ref('users/'+ sender);
+
       userRef.once("value", (snapshot) => {
         // if user does not exist
         if (snapshot.val() == null) {
@@ -79,12 +80,15 @@ router.post('/webhook/', (req, res) => {
             })
             bot.setSnackLimit(sender);
             // curr is snackLimit, set it
-          } else {
+          } else if (snapshot.val().snackLimit == 0) {
 
             userRef.update({
               snackLimit: text
             })
+            bot.selectOption(sender);
 
+          } else {
+            bot.selectOption(sender);
           }
 
         }

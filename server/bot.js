@@ -147,5 +147,24 @@ module.exports = {
         }
       console.log('showing snack limit')
       module.exports.sendMessage(sender, messageData)
+    },
+
+    selectOption: (sender) =>{
+        let messageData = {
+          "text":"Select the data you want to input",
+          "quick_replies":[
+            {
+              "content_type":"text",
+              "title":"Meal",
+              "payload":"Add Meal"
+            },
+            {
+              "content_type":"text",
+              "title":"Snack",
+              "payload":"Decrement Snack"
+            }
+          ]
+        }
+      module.exports.sendMessage(sender, messageData)
     }
 }
