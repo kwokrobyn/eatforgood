@@ -54,7 +54,7 @@ router.post('/webhook/', (req, res) => {
       if (i > 0) {
         let prevMessage = req.body.entry[0].messaging[i-1].message;
       } else {
-        let prevMessage = 0;
+        let prevMessage = -100;
       }
 
       // get referene for user from db
