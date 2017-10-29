@@ -2,6 +2,7 @@ const express = require('express')
 const accesstoken = "EAAXqgZAW0uwoBAJ0ZCtrVdF07EN0ZAx3EeZAWZBQdi4TRvo29qNLZCDiiQurLKuy43mqpkDQrTMMcu1LpcOlYIkpiluUeyPGCKXd9qt644DlsTB168D673TWaezOvcqVmUhgjgAreZC9dT7RjMlllYipxlsDfnq18qD5wpastC6kwZDZD"
 const request = require('request')
 const bot = require('./bot')
+const uuid = require('uuid')
 
 const firebase = require('./firebase');
 const db = firebase.database();
@@ -64,7 +65,7 @@ router.post('/webhook/', (req, res) => {
             weeklyAverage: 0,
 
             dailyAverage: 0,
-            meals: [], //need to append
+            meals: {"":0}, //need to append
             snacks: -10
           }).then(() => {
             bot.welcome(sender);
@@ -95,20 +96,27 @@ router.post('/webhook/', (req, res) => {
 
               if (payload.category == null) {
                 bot.selectOption(sender);
-                continue
+
               if (payload.category == "Meal") {
                 if(payload.name == ""){
-                  bot.selectOption(sender);
-                  continue
+                  bot.addMealName(sender);
+
                 }
                 else if (payload.score == 0){
-                  bot.selectOption(sender, payload.name);
-                  continue
+                  bot.addMealScore(sender, payload.name);
                 }
                 else {
+                  const uid = uuid.v4();
+                  const mealRef = db.ref('users/' + sender + '/meals/' + uid);
+
                   //db add object
+                  mealRef.set({
+                    name: payload.name,
+                    score: payload.score
+                  })
+
                   //report average score, vs goal
-                  continue
+
                 }
               }
               if (payload.category == "Snack") {
@@ -121,7 +129,7 @@ router.post('/webhook/', (req, res) => {
             }
           }
 
-        }
+
 
       });
 
