@@ -11,9 +11,9 @@ module.exports = {
           healthGoal: 0,
           totalAverage: 0,
           weeklyAverage: 0,
-          dailyAverage: 0
-          // meals: JSON, only implement when first meal added
-          // snacks: JSON, only implement when first snack added
+          dailyAverage: 0,
+          meals: [{"name": "", "score": 0}], // need to add new
+          snacks: -10
         })
         return -1;
       } else {
@@ -40,6 +40,22 @@ module.exports = {
     })
   }
 
-
+  // setMeal: (user, mealObj) => {
+  //   const userRef = db.ref('users/' + user.id);
+  //   userRef.once("value", (snapshot) => {
+  //     userRef.set({
+  //       meals: mealObj
+  //     });
+  //   })
+  // }
+  //
+  // updateSnack: (user, snackCount) => {
+  //   const userRef = db.ref('users/' + user.id);
+  //   userRef.once("value", (snapshot) => {
+  //     userRef.set({
+  //       snackCount
+  //     })
+  //   })
+  // }
 
 }

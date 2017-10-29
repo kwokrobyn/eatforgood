@@ -62,9 +62,9 @@ router.post('/webhook/', (req, res) => {
             healthGoal: 0,
             totalAverage: 0,
             weeklyAverage: 0,
-            dailyAverage: 0
-            // meals: JSON, only implement when first meal added
-            // snacks: JSON, only implement when first snack added
+            dailyAverage: 0,
+            meals: [], //need to append
+            snacks: -10
           }).then(() => {
             bot.welcome(sender);
             bot.setHealthGoal(sender);
@@ -75,7 +75,6 @@ router.post('/webhook/', (req, res) => {
         else {
           // curr is healthGoal, set it
           if (snapshot.val().healthGoal == 0) {
-
             userRef.update({
               healthGoal: text
             })
