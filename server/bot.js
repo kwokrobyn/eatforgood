@@ -187,7 +187,8 @@ module.exports = {
     },
 
     addMealName: (sender) => {
-      let messageData = {}
+      let messageData = {"text":"What did you eat?"}
+      module.exports.sendMessage(sender, messageData)
     },
 
     addMealScore: (sender, mealName) => {

@@ -51,6 +51,11 @@ router.post('/webhook/', (req, res) => {
     if (event.message && event.message.text) {
       let text = event.message.text;
       let payload = event.message.payload;
+      if (i > 0) {
+        let prevMessage = req.body.entry[0].messaging[i-1].message;
+      } else {
+        let prevMessage = 0;
+      }
 
       // get referene for user from db
       const userRef = db.ref('users/'+ sender);
@@ -92,6 +97,13 @@ router.post('/webhook/', (req, res) => {
 
           } else {
 
+            if (i > 0 && prevMessage.payload.category == "Meal") {
+              // if previous message is selectOption answer and current message is meal string
+              if (prevMessage.payload.score == 0) {
+                bot.addMealScore(sender, text);
+              }
+            }
+
             if (payload != null) {
 
               if (payload.category == null) {
@@ -100,11 +112,10 @@ router.post('/webhook/', (req, res) => {
               if (payload.category == "Meal") {
                 if(payload.name == ""){
                   bot.addMealName(sender);
-
                 }
-                else if (payload.score == 0){
-                  bot.addMealScore(sender, payload.name);
-                }
+                // else if (payload.score == 0){
+                //   bot.addMealScore(sender, payload.name);
+                // }
                 else {
                   const uid = uuid.v4();
                   const mealRef = db.ref('users/' + sender + '/meals/' + uid);
