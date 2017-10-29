@@ -62,6 +62,7 @@ router.post('/webhook/', (req, res) => {
             healthGoal: 0,
             totalAverage: 0,
             weeklyAverage: 0,
+
             dailyAverage: 0,
             meals: [], //need to append
             snacks: -10
@@ -75,6 +76,7 @@ router.post('/webhook/', (req, res) => {
         else {
           // curr is healthGoal, set it
           if (snapshot.val().healthGoal == 0) {
+
             userRef.update({
               healthGoal: text
             })
@@ -90,6 +92,7 @@ router.post('/webhook/', (req, res) => {
           } else {
 
             if (payload != null) {
+
               if (payload.category == null) {
                 bot.selectOption(sender);
                 continue
@@ -113,6 +116,7 @@ router.post('/webhook/', (req, res) => {
                 // if snackCounter <= 0, public shaming
               }
             }
+
               }
             }
           }
