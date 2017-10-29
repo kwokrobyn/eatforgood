@@ -68,9 +68,7 @@ router.post('/webhook/', (req, res) => {
             healthGoal: 0,
             totalAverage: 0,
             weeklyAverage: 0,
-
             dailyAverage: 0,
-            meals: {"":0}, //need to append
             snacks: -10
           }).then(() => {
             bot.welcome(sender);
