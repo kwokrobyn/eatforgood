@@ -62,9 +62,10 @@ router.post('/webhook/', (req, res) => {
             healthGoal: 0,
             totalAverage: 0,
             weeklyAverage: 0,
-            dailyAverage: 0
-            // meals: JSON, only implement when first meal added
-            // snacks: JSON, only implement when first snack added
+
+            dailyAverage: 0,
+            meals: [], //need to append
+            snacks: -10
           }).then(() => {
             bot.welcome(sender);
             bot.setHealthGoal(sender);
@@ -91,17 +92,30 @@ router.post('/webhook/', (req, res) => {
           } else {
 
             if (payload != null) {
+
+              if (payload.category == null) {
+                bot.selectOption(sender);
+                continue
               if (payload.category == "Meal") {
-                
+                if(payload.name == ""){
+                  bot.selectOption(sender);
+                  continue
+                }
+                else if (payload.score == 0){
+                  bot.selectOption(sender, payload.name);
+                  continue
+                }
+                else {
+                  //db add object
+                  //report average score, vs goal
+                  continue
+                }
+              }
+              if (payload.category == "Snack") {
+                // get value from db, decrement
+                // if snackCounter <= 0, public shaming
               }
             }
-
-            if (payload.category == null) {
-              bot.selectOption(sender);
-            } else if (payload.category == "Meal") {
-              if (payload.name == "") {
-                // input name
-              } else if {
 
               }
             }

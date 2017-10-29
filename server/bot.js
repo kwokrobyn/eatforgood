@@ -31,7 +31,7 @@ module.exports = {
   }, // END OF SENDTEXT
 
   welcome: (sender) => {
-      let welcMsgData = {"text": "Hi, I'm world-renowned nutrionist and health guru, Scott Heng! I'm here to help you reach your goal of being a healthy eater! We'll be keeping track of your meals every day, and you will grade each of your meals on how healthy they are, on a scale from 1 to 10, with 1 being unhealthy, like oreos,and 10 being very healthy, like an organic, free-range, non-GMO salad without dressing!"}
+      let welcMsgData = {"text": "Hi, I'm world-renowned nutritionist and health guru, Scott Heng! I'm here to help you reach your goal of being a healthy eater! We'll be keeping track of your meals every day, and you will grade your meals on how healthy they are, on a scale from 1 to 10, with 1 being unhealthy, like oreos,and 10 being very healthy, like an organic, free-range, non-GMO salad without dressing!"}
       module.exports.sendMessage(sender, welcMsgData)
     },
 
@@ -62,6 +62,11 @@ module.exports = {
               {
                 "content_type":"text",
                 "title":"5",
+                "payload":"<STRING_SENT_TO_WEBHOOK>"
+              },
+              {
+                "content_type":"text",
+                "title":"6",
                 "payload":"<STRING_SENT_TO_WEBHOOK>"
               },
               {
@@ -126,6 +131,11 @@ module.exports = {
               },
               {
                 "content_type":"text",
+                "title":"6",
+                "payload":"<STRING_SENT_TO_WEBHOOK>"
+              },
+              {
+                "content_type":"text",
                 "title":"7",
                 "payload":"<STRING_SENT_TO_WEBHOOK>"
               },
@@ -174,5 +184,73 @@ module.exports = {
           ]
         }
       module.exports.sendMessage(sender, messageData)
+    },
+
+    addMealName: (sender) => {
+      let messageData = {}
+    },
+
+    addMealScore: (sender, mealName) => {
+      let messsageData = {
+          "text":"Give your meal a health score!",
+          "quick_replies":[
+            {
+              "content_type":"text",
+              "title":"0",
+              "payload":{"name":mealName, "score":0}
+            },
+            {
+              "content_type":"text",
+              "title":"1",
+              "payload":{"name":mealName, "score":1}
+            },
+            {
+              "content_type":"text",
+              "title":"2",
+              "payload":{"name":mealName, "score":2}
+            },
+            {
+              "content_type":"text",
+              "title":"3",
+              "payload":{"name":mealName, "score":3}
+            },
+            {
+              "content_type":"text",
+              "title":"4",
+              "payload":{"name":mealName, "score":4}
+            },
+            {
+              "content_type":"text",
+              "title":"5",
+              "payload":{"name":mealName, "score":5}
+            },
+            {
+              "content_type":"text",
+              "title":"6",
+              "payload":{"name":mealName, "score":6}
+            },
+            {
+              "content_type":"text",
+              "title":"7",
+              "payload":{"name":mealName, "score":7}
+            },
+            {
+              "content_type":"text",
+              "title":"8",
+              "payload":{"name":mealName, "score":8}
+            },
+            {
+              "content_type":"text",
+              "title":"9",
+              "payload":{"name":mealName, "score":9}
+            },
+            {
+              "content_type":"text",
+              "title":"10",
+              "payload":{"name":mealName, "score":10}
+            }
+          ]
+        }
+
     }
 }
