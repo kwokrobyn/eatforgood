@@ -54,9 +54,7 @@ router.post('/webhook/', (req, res) => {
       let text = event.message.text;
       let payload = event.message.payload;
 
-      if (payload == "<HEALTH_GOAL_POOR>") {
-        bot.sendMessage(sender, {"text": "You suck"})
-      }
+
 
       // // get referene for user from db
       // const userRef = db.ref('users/'+ sender);
@@ -175,6 +173,10 @@ router.post('/webhook/', (req, res) => {
 
       if (payload == "<GET_STARTED_PAYLOAD>") {
         bot.getStarted(sender);
+      }
+
+      if (payload == "<HEALTH_GOAL_POOR>") {
+        bot.sendMessage(sender, {"text": "You suck"})
       }
 
     }
