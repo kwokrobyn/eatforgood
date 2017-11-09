@@ -15,6 +15,8 @@ module.exports = {
 
   },
 
+  //addMeal: (userID, )
+
   setSnackLimit: (user, snackLimit) => {
     const userRef = db.ref('users/' + user.id);
     userRef.once("value", (snapshot) => {

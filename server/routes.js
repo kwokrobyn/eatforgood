@@ -88,6 +88,19 @@ router.post('/webhook/', (req, res) => {
           bot.addMeal1(sender, "Snack");
         }
 
+        if (payload == "<ADD_MEAL_POOR>") {
+          bot.addMeal2(sender, text, "Poor")
+          //db.addMeal(sender, text);
+        }
+        if (payload == "<HEALTH_GOAL_OK>") {
+          bot.addMeal2(sender, text, "OK")
+          //db.addMeal(sender, text);
+        }
+        if (payload == "<HEALTH_GOAL_GOOD>") {
+          bot.addMeal2(sender, text, "Good")
+          //db.addMeal(sender, text);
+        }
+
       } else if (text.toLowerCase().includes("meal") || text.toLowerCase().includes("add")) {
         bot.addMeal(sender);
 

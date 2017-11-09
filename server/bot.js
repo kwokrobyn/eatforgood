@@ -233,6 +233,23 @@ module.exports = {
     module.exports.sendMessage(sender, messageData);
   },
 
+  addMeal2: (sender, level, levelComment) => {
+    let reply;
+    if (levelComment == "Poor") {
+      reply = "You chose " + level + ". Tsk...you're better than that!"
+    } else if (levelComment == "OK") {
+      reply = "You chose " + level + ". Not too bad!"
+    } else if (levelComment == "Good") {
+      reply = "You chose " + level + ". Keep up the good work!"
+    }
+
+    let messageData = {
+      "text": reply
+    }
+    module.exports.sendMessage(sender, messageData);
+
+  },
+
   setSnackLimit: (sender) =>{
       let messageData = {
           "text":"Set a limit to how many snacks you can eat per day!",
