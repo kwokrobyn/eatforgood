@@ -52,77 +52,78 @@ router.post('/webhook/', (req, res) => {
       let text = event.message.text;
       let payload = event.message.payload;
 
+      bot.sendMessage(sender, {"text": text});
 
-      // get referene for user from db
-      const userRef = db.ref('users/'+ sender);
-
-      userRef.once("value", (snapshot) => {
-        // if user does not exist
-        if (snapshot.val() == null) {
-          userRef.set({
-            snackLimit: 0,
-            healthGoal: 0,
-            totalAverage: 0,
-            goalsSet: false,
-            currentlySetting: 'none',
-            currentString: 'hi',
-            weeklyAverage: 0,
-            dailyAverage: 0,
-            snacks: -10
-          }).then(() => {
-            bot.welcome(sender);
-            bot.setHealthGoal(sender);
-          })
-        }
+      // // get referene for user from db
+      // const userRef = db.ref('users/'+ sender);
+      //
+      // userRef.once("value", (snapshot) => {
+      //   // if user does not exist
+      //   if (snapshot.val() == null) {
+      //     userRef.set({
+      //       snackLimit: 0,
+      //       healthGoal: 0,
+      //       totalAverage: 0,
+      //       goalsSet: false,
+      //       currentlySetting: 'none',
+      //       currentString: 'hi',
+      //       weeklyAverage: 0,
+      //       dailyAverage: 0,
+      //       snacks: -10
+      //     }).then(() => {
+      //       bot.welcome(sender);
+      //       bot.setHealthGoal(sender);
+      //     })
+      //   }
 
         // if user exists
-        else {
-          if (snapshot.val().goalsSet == false) {
-            // curr is healthGoal, set it
-            if (snapshot.val().healthGoal == 0) {
-
-              userRef.update({
-                healthGoal: text
-              })
-              bot.setSnackLimit(sender);
-              // curr is snackLimit, set it
-            } else if (snapshot.val().snackLimit == 0) {
-
-              userRef.update({
-                snackLimit: text,
-                goalsSet: true
-              })
-              bot.selectOption(sender);
-          } else { // goalsSet == true, event = Meal or Snack
-            if (text.toLowerCase() == "Meal") {
-              userRef.update({
-                currentlySetting: 'mealname'
-              })
-              bot.addMealName(sender);
-            }
-
-            if (snapshot.val().currentlySetting == 'mealname') {
-              userRef.update({
-                currentlySetting: 'mealscore'
-              })
-              bot.addMealScore(sender, snapshot.val().currentString);
-            }
-
-            if (snapshot.val().currentlySetting == 'mealscore') {
-              const uid = uuid.v4();
-              const mealRef = db.ref('users/' + sender + '/meals/' + uid);
-
-              //db add object
-              mealRef.set({
-                name: payload.name,
-                score: payload.score
-              })
-            }
-
-          }
-
-        } // end of goals not set
-      } // end of else
+      //   else {
+      //     if (snapshot.val().goalsSet == false) {
+      //       // curr is healthGoal, set it
+      //       if (snapshot.val().healthGoal == 0) {
+      //
+      //         userRef.update({
+      //           healthGoal: text
+      //         })
+      //         bot.setSnackLimit(sender);
+      //         // curr is snackLimit, set it
+      //       } else if (snapshot.val().snackLimit == 0) {
+      //
+      //         userRef.update({
+      //           snackLimit: text,
+      //           goalsSet: true
+      //         })
+      //         bot.selectOption(sender);
+      //     } else { // goalsSet == true, event = Meal or Snack
+      //       if (text.toLowerCase() == "Meal") {
+      //         userRef.update({
+      //           currentlySetting: 'mealname'
+      //         })
+      //         bot.addMealName(sender);
+      //       }
+      //
+      //       if (snapshot.val().currentlySetting == 'mealname') {
+      //         userRef.update({
+      //           currentlySetting: 'mealscore'
+      //         })
+      //         bot.addMealScore(sender, snapshot.val().currentString);
+      //       }
+      //
+      //       if (snapshot.val().currentlySetting == 'mealscore') {
+      //         const uid = uuid.v4();
+      //         const mealRef = db.ref('users/' + sender + '/meals/' + uid);
+      //
+      //         //db add object
+      //         mealRef.set({
+      //           name: payload.name,
+      //           score: payload.score
+      //         })
+      //       }
+      //
+      //     }
+      //
+      //   } // end of goals not set
+      // } // end of else
 
             // if (i > 0 && prevMessage.payload.category == "Meal") {
             //   // if previous message is selectOption answer and current message is meal string
@@ -167,7 +168,7 @@ router.post('/webhook/', (req, res) => {
 
 
 
-      });
+      //});
 
 
     } else {
@@ -175,8 +176,6 @@ router.post('/webhook/', (req, res) => {
       res.sendStatus(404);
     }
   }
-
-
     // Returns a '200 OK' response to all requests
     res.status(200).send('EVENT_RECEIVED');
 });
