@@ -56,6 +56,10 @@ router.post('/webhook/', (req, res) => {
       if (event.message.quick_reply) {
         let payload = event.message.quick_reply.payload;
 
+        if (payload == "<ADD_MEAL>") {
+          bot.addMeal(sender);
+        }
+
         if (payload == "<HEALTH_GOAL_POOR>") {
           // snarky comment on the Goal
           bot.commentPoorGoal(sender, text)
@@ -71,7 +75,7 @@ router.post('/webhook/', (req, res) => {
           db.insertUser(sender, text);
         }
 
-      } else if (text.toLowerCase().includes("meal") or text.toLowerCase().includes("add")) {
+      } else if (text.toLowerCase().includes("meal") || text.toLowerCase().includes("add")) {
         bot.addMeal(sender);
 
       // unable to read, prompt user for appropriate text
@@ -197,10 +201,6 @@ router.post('/webhook/', (req, res) => {
 
       if (payload == "<GET_STARTED_PAYLOAD>") {
         bot.getStarted(sender);
-      }
-
-      if (payload == "<ADD_MEAL>") {
-        bot.addMeal(sender);
       }
 
     }
