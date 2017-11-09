@@ -51,8 +51,9 @@ router.post('/webhook/', (req, res) => {
     if (event.message && event.message.text) {
       let text = event.message.text;
       let payload = event.message.payload;
-
-      bot.sendMessage(sender, {"text": text});
+      if event.postback {
+        bot.sendMessage(sender, {"text": "hello yooyo"});
+      }
 
       // // get referene for user from db
       // const userRef = db.ref('users/'+ sender);
