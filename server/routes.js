@@ -172,9 +172,9 @@ router.post('/webhook/', (req, res) => {
     // postback (e.g. Get Started)
     } else if (event.postback && event.postback.payload) {
       let payload = event.postback.payload;
-      bot.sendMessage(sender, {"text":payload})
 
       if (payload == "<GET_STARTED_PAYLOAD>") {
+        bot.sendMessage(sender, {"text":"hello"})
         bot.getStarted(sender);
       }
 
