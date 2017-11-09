@@ -6,7 +6,6 @@ const request = require('request')
 module.exports = {
 
   sendMessage: (sender, messageData) => {
-    console.log('hi');
 
     request({
       url: 'https://graph.facebook.com/v2.6/me/messages',

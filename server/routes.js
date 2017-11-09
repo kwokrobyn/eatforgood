@@ -174,7 +174,6 @@ router.post('/webhook/', (req, res) => {
       let payload = event.postback.payload;
 
       if (payload == "<GET_STARTED_PAYLOAD>") {
-        bot.sendMessage(sender, {"text":"hello"})
         bot.getStarted(sender);
       }
 
