@@ -49,13 +49,11 @@ router.post('/webhook/', (req, res) => {
     let event = req.body.entry[0].messaging[i]
     let sender = event.sender.id
 
-    bot.sendMessage(sender, {"text": event});
-
-
+    // normal text
     if (event.message && event.message.text) {
       let text = event.message.text;
       let payload = event.message.payload;
-
+      bot.sendMessage(sender, {"text":"hi"})
       // // get referene for user from db
       // const userRef = db.ref('users/'+ sender);
       //
@@ -77,7 +75,6 @@ router.post('/webhook/', (req, res) => {
       //       bot.setHealthGoal(sender);
       //     })
       //   }
-
         // if user exists
       //   else {
       //     if (snapshot.val().goalsSet == false) {
@@ -126,7 +123,6 @@ router.post('/webhook/', (req, res) => {
       //
       //   } // end of goals not set
       // } // end of else
-
             // if (i > 0 && prevMessage.payload.category == "Meal") {
             //   // if previous message is selectOption answer and current message is meal string
             //   if (prevMessage.payload.score == 0) {
@@ -167,13 +163,15 @@ router.post('/webhook/', (req, res) => {
             // }
             //
             //   }
-
-
-
       //});
 
+    // postback (e.g. Get Started)
+    } else if (event.postback && event.postback.payload) {
+      let payload = event.postback.payload;
+      bot.sendMessage(sender, {"text":"hello"})
+    }
 
-    } else {
+     else {
       // Returns a '404 Not Found' if event is not from a page subscription
       res.sendStatus(404);
     }
