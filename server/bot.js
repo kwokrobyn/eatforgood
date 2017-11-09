@@ -87,7 +87,7 @@ module.exports = {
         }
       ]
     }
-
+    module.exports.sendMessage(sender, messageData);
   },
 
   welcome: (sender) => {
