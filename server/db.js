@@ -25,9 +25,8 @@ module.exports = {
     const userRef = db.ref('users/'+ userID);
     userRef.set({
       healthGoal: parseInt(goal),
-      totalAverage: 0,
-      weeklyAverage: 0,
-      dailyAverage: 0
+      mealCount: 0,
+      totalAverage: 0
     });
 
   },
@@ -41,41 +40,27 @@ module.exports = {
       healthLevel: parseInt(level),
       date: date
     });
+    module.exports.updateAverage(userID, level);
   },
 
-  setSnackLimit: (user, snackLimit) => {
-    const userRef = db.ref('users/' + user.id);
+  updateAverage: (userID, entry) => {
+    const userRef = db.ref('users/' + userID);
     userRef.once("value", (snapshot) => {
-      userRef.set({
-        snackLimit: snackLimit
+      const newCount = snapshot.val().mealCount + 1
+      const newAve = (snapshot.val().totalAverage * (newCount - 1) + entry)/newCount
+      userRef.update({
+        mealCount: newCount,
+        totalAverage: newAve
       });
-    })
-  },
-
-  setHealthGoal: (user, healthGoal) => {
-    const userRef = db.ref('users/' + user.id);
-    userRef.once("value", (snapshot) => {
-      userRef.set({
-        healthGoal: healthGoal
-      });
-    })
+    });
   }
 
-  // setMeal: (user, mealObj) => {
+  //setMeal: (user, mealObj) => {
   //   const userRef = db.ref('users/' + user.id);
   //   userRef.once("value", (snapshot) => {
   //     userRef.set({
   //       meals: mealObj
   //     });
-  //   })
-  // }
-  //
-  // updateSnack: (user, snackCount) => {
-  //   const userRef = db.ref('users/' + user.id);
-  //   userRef.once("value", (snapshot) => {
-  //     userRef.set({
-  //       snackCount
-  //     })
   //   })
   // }
 
