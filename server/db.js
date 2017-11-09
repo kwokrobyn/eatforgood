@@ -40,14 +40,14 @@ module.exports = {
       healthLevel: parseInt(level),
       date: date
     });
-    
+
   },
 
   updateAverage: (userID, entry) => {
     const userRef = db.ref('users/' + userID);
     userRef.once("value", (snapshot) => {
       const newCount = snapshot.val().mealCount + 1
-      const newAve = (snapshot.val().totalAverage * (newCount - 1) + entry)/newCount
+      const newAve = (snapshot.val().totalAverage * (newCount - 1) + entry)/parseFloat(newCount)
       userRef.update({
         mealCount: newCount,
         totalAverage: newAve

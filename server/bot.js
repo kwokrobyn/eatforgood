@@ -2,6 +2,8 @@ const express = require('express')
 const accesstoken = "EAAXqgZAW0uwoBAJ0ZCtrVdF07EN0ZAx3EeZAWZBQdi4TRvo29qNLZCDiiQurLKuy43mqpkDQrTMMcu1LpcOlYIkpiluUeyPGCKXd9qt644DlsTB168D673TWaezOvcqVmUhgjgAreZC9dT7RjMlllYipxlsDfnq18qD5wpastC6kwZDZD"
 const request = require('request')
 const db = require('./db')
+const firebase = require('./firebase');
+const directdb = firebase.database();
 
 
 module.exports = {
@@ -248,6 +250,19 @@ module.exports = {
       "text": reply
     }
     module.exports.sendMessage(sender, messageData);
+  },
+
+  checkProgress: (sender) => {
+    const userRef = directdb.ref('users/' + sender);
+    userRef.once("value", (snapshot) => {
+      const goal = snapshot.val().healthGoal;
+      const curr = snapshot.val().totalAverage;
+
+      let messageData = {
+        "text": "Your goal is " + goal + ", your current score is " + curr
+      }
+      module.exports.sendMessage(sender, messageData);
+    })
   },
 
   setSnackLimit: (sender) =>{
