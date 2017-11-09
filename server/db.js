@@ -13,7 +13,7 @@ module.exports = {
       dailyAverage: 0
     });
 
-  }
+  },
 
   getUser: (userID) => {
     const userRef = db.ref('users/'+ userID);
