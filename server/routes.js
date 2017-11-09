@@ -75,6 +75,19 @@ router.post('/webhook/', (req, res) => {
           db.insertUser(sender, text);
         }
 
+        if (payload == "<ADD_MEAL_BREAKFAST>") {
+          bot.addMeal1(sender, "Breakfast");
+        }
+        if (payload == "<ADD_MEAL_LUNCH>") {
+          bot.addMeal1(sender, "Lunch");
+        }
+        if (payload == "<ADD_MEAL_DINNER>") {
+          bot.addMeal1(sender, "Dinner");
+        }
+        if (payload == "<ADD_MEAL_SNACK>") {
+          bot.addMeal1(sender, "Snack");
+        }
+
       } else if (text.toLowerCase().includes("meal") || text.toLowerCase().includes("add")) {
         bot.addMeal(sender);
 

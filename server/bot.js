@@ -161,6 +161,77 @@ module.exports = {
     module.exports.sendMessage(sender, messageData);
   },
 
+  addMeal1: (sender, mealType) => {
+    let reply;
+
+    // customize reply according to mealType
+    if (mealType == "Breakfast") {
+      reply = "Good morning! You chose Breakfast. How healthy was your meal?"
+    } else if (mealType == "Lunch") {
+      reply = "Good afternoon! You chose Lunch. How healthy was your meal?"
+    } else if (mealType == "Dinner") {
+      reply = "Good evening! You chose Dinner. How healthy was your meal?"
+    } else if (mealType == "Snack") {
+      reply = "Hello! You chose Snack. How healthy was your snack?"
+    }
+
+    let messageData = {
+      "text": reply,
+      "quick_replies": [
+        {
+          "content_type":"text",
+          "title":"1",
+          "payload":"<ADD_MEAL_POOR>"
+        },
+        {
+          "content_type":"text",
+          "title":"2",
+          "payload":"<ADD_MEAL_POOR>"
+        },
+        {
+          "content_type":"text",
+          "title":"3",
+          "payload":"<ADD_MEAL_POOR>"
+        },
+        {
+          "content_type":"text",
+          "title":"4",
+          "payload":"<ADD_MEAL_POOR>"
+        },
+        {
+          "content_type":"text",
+          "title":"5",
+          "payload":"<ADD_MEAL_OK>"
+        },
+        {
+          "content_type":"text",
+          "title":"6",
+          "payload":"<ADD_MEAL_OK>"
+        },
+        {
+          "content_type":"text",
+          "title":"7",
+          "payload":"<ADD_MEAL_OK>"
+        },
+        {
+          "content_type":"text",
+          "title":"8",
+          "payload":"<ADD_MEAL_GOOD>"
+        },
+        {
+          "content_type":"text",
+          "title":"9",
+          "payload":"<ADD_MEAL_GOOD>"
+        },
+        {
+          "content_type":"text",
+          "title":"10",
+          "payload":"<ADD_MEAL_GOOD>"
+        }
+      ]
+    }
+  },
+
   setSnackLimit: (sender) =>{
       let messageData = {
           "text":"Set a limit to how many snacks you can eat per day!",
