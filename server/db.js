@@ -38,7 +38,7 @@ module.exports = {
     const mealRef = db.ref('users/' + userID + '/meals/' + mealID);
     mealRef.set({
       mealType: mealType,
-      healthLevel: level,
+      healthLevel: parseInt(level),
       date: date
     });
   },
