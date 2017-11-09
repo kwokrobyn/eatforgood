@@ -2,10 +2,8 @@ const express = require('express')
 const accesstoken = "EAAXqgZAW0uwoBAJ0ZCtrVdF07EN0ZAx3EeZAWZBQdi4TRvo29qNLZCDiiQurLKuy43mqpkDQrTMMcu1LpcOlYIkpiluUeyPGCKXd9qt644DlsTB168D673TWaezOvcqVmUhgjgAreZC9dT7RjMlllYipxlsDfnq18qD5wpastC6kwZDZD"
 const request = require('request')
 const bot = require('./bot')
+const db = require('./db')
 const uuid = require('uuid')
-
-const firebase = require('./firebase');
-const db = firebase.database();
 
 // import router
 const router = express.Router();
@@ -60,12 +58,15 @@ router.post('/webhook/', (req, res) => {
 
         if (payload == "<HEALTH_GOAL_POOR>") {
           bot.commentPoorGoal(sender, text)
+          db.insertUser(sender, text);
         }
         if (payload == "<HEALTH_GOAL_OK>") {
           bot.commentOkGoal(sender, text)
+          db.insertUser(sender, text);
         }
         if (payload == "<HEALTH_GOAL_GOOD>") {
           bot.commentGoodGoal(sender, text)
+          db.insertUser(sender, text);
         }
 
       }

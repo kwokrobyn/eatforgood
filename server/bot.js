@@ -108,164 +108,163 @@ module.exports = {
     module.exports.sendMessage(sender, messageData);
   },
 
-
-    setSnackLimit: (sender) =>{
-        let messageData = {
-            "text":"Set a limit to how many snacks you can eat per day!",
-            "quick_replies":[
-              {
-                "content_type":"text",
-                "title":"0",
-                "payload":"<STRING_SENT_TO_WEBHOOK>"
-              },
-              {
-                "content_type":"text",
-                "title":"1",
-                "payload":"<STRING_SENT_TO_WEBHOOK>"
-              },
-              {
-                "content_type":"text",
-                "title":"2",
-                "payload":"<STRING_SENT_TO_WEBHOOK>"
-              },
-              {
-                "content_type":"text",
-                "title":"3",
-                "payload":"<STRING_SENT_TO_WEBHOOK>"
-              },
-              {
-                "content_type":"text",
-                "title":"4",
-                "payload":"<STRING_SENT_TO_WEBHOOK>"
-              },
-              {
-                "content_type":"text",
-                "title":"5",
-                "payload":"<STRING_SENT_TO_WEBHOOK>"
-              },
-              {
-                "content_type":"text",
-                "title":"6",
-                "payload":"<STRING_SENT_TO_WEBHOOK>"
-              },
-              {
-                "content_type":"text",
-                "title":"7",
-                "payload":"<STRING_SENT_TO_WEBHOOK>"
-              },
-              {
-                "content_type":"text",
-                "title":"8",
-                "payload":"<STRING_SENT_TO_WEBHOOK>"
-              },
-              {
-                "content_type":"text",
-                "title":"9",
-                "payload":"<STRING_SENT_TO_WEBHOOK>"
-              },
-              {
-                "content_type":"text",
-                "title":"10",
-                "payload":"<STRING_SENT_TO_WEBHOOK>"
-              }
-            ]
-        }
-      console.log('showing snack limit')
-      module.exports.sendMessage(sender, messageData)
-    },
-
-    selectOption: (sender) =>{
-        let messageData = {
-          "text":"Select the data you want to input",
-          "quick_replies":[
-            {
-              "content_type":"text",
-              "title":"Meal",
-              "payload": {
-                "category": "Meal",
-                "name": "",
-                "score": 0
-              }
-            },
-            {
-              "content_type":"text",
-              "title":"Snack",
-              "payload": {
-                "category": "Snack",
-                "name": ""
-              }
-            }
-          ]
-        }
-      module.exports.sendMessage(sender, messageData)
-    },
-
-    addMealName: (sender) => {
-      let messageData = {"text":"What did you eat?"}
-      module.exports.sendMessage(sender, messageData)
-    },
-
-    addMealScore: (sender, mealName) => {
-      let messsageData = {
-          "text":"Give your meal a health score!",
+  setSnackLimit: (sender) =>{
+      let messageData = {
+          "text":"Set a limit to how many snacks you can eat per day!",
           "quick_replies":[
             {
               "content_type":"text",
               "title":"0",
-              "payload":{"name":mealName, "score":0}
+              "payload":"<STRING_SENT_TO_WEBHOOK>"
             },
             {
               "content_type":"text",
               "title":"1",
-              "payload":{"name":mealName, "score":1}
+              "payload":"<STRING_SENT_TO_WEBHOOK>"
             },
             {
               "content_type":"text",
               "title":"2",
-              "payload":{"name":mealName, "score":2}
+              "payload":"<STRING_SENT_TO_WEBHOOK>"
             },
             {
               "content_type":"text",
               "title":"3",
-              "payload":{"name":mealName, "score":3}
+              "payload":"<STRING_SENT_TO_WEBHOOK>"
             },
             {
               "content_type":"text",
               "title":"4",
-              "payload":{"name":mealName, "score":4}
+              "payload":"<STRING_SENT_TO_WEBHOOK>"
             },
             {
               "content_type":"text",
               "title":"5",
-              "payload":{"name":mealName, "score":5}
+              "payload":"<STRING_SENT_TO_WEBHOOK>"
             },
             {
               "content_type":"text",
               "title":"6",
-              "payload":{"name":mealName, "score":6}
+              "payload":"<STRING_SENT_TO_WEBHOOK>"
             },
             {
               "content_type":"text",
               "title":"7",
-              "payload":{"name":mealName, "score":7}
+              "payload":"<STRING_SENT_TO_WEBHOOK>"
             },
             {
               "content_type":"text",
               "title":"8",
-              "payload":{"name":mealName, "score":8}
+              "payload":"<STRING_SENT_TO_WEBHOOK>"
             },
             {
               "content_type":"text",
               "title":"9",
-              "payload":{"name":mealName, "score":9}
+              "payload":"<STRING_SENT_TO_WEBHOOK>"
             },
             {
               "content_type":"text",
               "title":"10",
-              "payload":{"name":mealName, "score":10}
+              "payload":"<STRING_SENT_TO_WEBHOOK>"
             }
           ]
-        }
+      }
+    console.log('showing snack limit')
+    module.exports.sendMessage(sender, messageData)
+  },
+
+  selectOption: (sender) =>{
+      let messageData = {
+        "text":"Select the data you want to input",
+        "quick_replies":[
+          {
+            "content_type":"text",
+            "title":"Meal",
+            "payload": {
+              "category": "Meal",
+              "name": "",
+              "score": 0
+            }
+          },
+          {
+            "content_type":"text",
+            "title":"Snack",
+            "payload": {
+              "category": "Snack",
+              "name": ""
+            }
+          }
+        ]
+      }
+    module.exports.sendMessage(sender, messageData)
+  },
+
+  addMealName: (sender) => {
+    let messageData = {"text":"What did you eat?"}
+    module.exports.sendMessage(sender, messageData)
+  },
+
+  addMealScore: (sender, mealName) => {
+    let messsageData = {
+        "text":"Give your meal a health score!",
+        "quick_replies":[
+          {
+            "content_type":"text",
+            "title":"0",
+            "payload":{"name":mealName, "score":0}
+          },
+          {
+            "content_type":"text",
+            "title":"1",
+            "payload":{"name":mealName, "score":1}
+          },
+          {
+            "content_type":"text",
+            "title":"2",
+            "payload":{"name":mealName, "score":2}
+          },
+          {
+            "content_type":"text",
+            "title":"3",
+            "payload":{"name":mealName, "score":3}
+          },
+          {
+            "content_type":"text",
+            "title":"4",
+            "payload":{"name":mealName, "score":4}
+          },
+          {
+            "content_type":"text",
+            "title":"5",
+            "payload":{"name":mealName, "score":5}
+          },
+          {
+            "content_type":"text",
+            "title":"6",
+            "payload":{"name":mealName, "score":6}
+          },
+          {
+            "content_type":"text",
+            "title":"7",
+            "payload":{"name":mealName, "score":7}
+          },
+          {
+            "content_type":"text",
+            "title":"8",
+            "payload":{"name":mealName, "score":8}
+          },
+          {
+            "content_type":"text",
+            "title":"9",
+            "payload":{"name":mealName, "score":9}
+          },
+          {
+            "content_type":"text",
+            "title":"10",
+            "payload":{"name":mealName, "score":10}
+          }
+        ]
+      }
 
     }
 }
