@@ -54,7 +54,7 @@ router.post('/webhook/', (req, res) => {
       let text = event.message.text;
       let payload = event.message.payload;
 
-      if (payload == "<HEALTH_GOAL_POOR>") {
+      if (text == "2") {
         bot.sendMessage(sender, {"text": "You suck"})
       }
 
@@ -173,8 +173,6 @@ router.post('/webhook/', (req, res) => {
     // postback (e.g. Get Started)
     } else if (event.postback && event.postback.payload) {
       let payload = event.postback.payload;
-
-      bot.sendMessage(sender, {"text": payload});
 
       if (payload == "<GET_STARTED_PAYLOAD>") {
         bot.getStarted(sender);
