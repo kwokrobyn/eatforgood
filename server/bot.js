@@ -230,6 +230,7 @@ module.exports = {
         }
       ]
     }
+    module.exports.sendMessage(sender, messageData);
   },
 
   setSnackLimit: (sender) =>{
