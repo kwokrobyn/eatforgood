@@ -54,9 +54,20 @@ router.post('/webhook/', (req, res) => {
       let text = event.message.text;
       let payload = event.message.payload;
 
+      // quick reply
       if (event.message.quick_reply) {
         let payload = event.message.quick_reply.payload;
-        bot.sendMessage(sender, {"text": payload})
+
+        if (payload == "<HEALTH_GOAL_POOR>") {
+          bot.commentPoorGoal(sender, text)
+        }
+        if (payload == "<HEALTH_GOAL_OK>") {
+          bot.commentOkGoal(sender, text)
+        }
+        if (payload == "<HEALTH_GOAL_GOOD>") {
+          bot.commentGoodGoal(sender, text)
+        }
+
       }
 
 
