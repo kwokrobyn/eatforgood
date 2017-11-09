@@ -108,6 +108,59 @@ module.exports = {
     module.exports.sendMessage(sender, messageData);
   },
 
+  help: (sender) => {
+    let messageData = {
+      "text": "'add' a meal, 'check' your progress, or simply choose from the options below. "
+      "quick_replies": [
+        {
+          "content_type":"text",
+          "title":"Add a meal",
+          "payload":"<ADD_MEAL>"
+        },
+        {
+          "content_type":"text",
+          "title":"Check your progress",
+          "payload":"<CHECK_PROGRESS>"
+        },
+        {
+          "content_type":"text",
+          "title":"Cancel",
+          "payload":"<CANCEL>"
+        },
+      ]
+    }
+    module.exports.sendMessage(sender, messageData);
+  },
+
+  addMeal: (sender) => {
+    let messageData = {
+      "text": "What meal is this?"
+      "quick_replies": [
+        {
+          "content_type":"text",
+          "title":"Breakfast",
+          "payload":"<ADD_MEAL_BREAKFAST>"
+        },
+        {
+          "content_type":"text",
+          "title":"Lunch",
+          "payload":"<ADD_MEAL_LUNCH>"
+        },
+        {
+          "content_type":"text",
+          "title":"Dinner",
+          "payload":"<ADD_MEAL_DINNER>"
+        },
+        {
+          "content_type":"text",
+          "title":"Snack",
+          "payload":"<ADD_MEAL_SNACK>"
+        }
+      ]
+    }
+    module.exports.sendMessage(sender, messageData);
+  },
+
   setSnackLimit: (sender) =>{
       let messageData = {
           "text":"Set a limit to how many snacks you can eat per day!",

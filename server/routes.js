@@ -45,7 +45,7 @@ router.post('/webhook/', (req, res) => {
 
   for (let i = 0; i < messaging_events.length; i++) {
     let event = req.body.entry[0].messaging[i]
-    let sender = event.sender.id
+    let sender = event.sender.id;
 
     // normal text
     if (event.message && event.message.text) {
@@ -57,7 +57,9 @@ router.post('/webhook/', (req, res) => {
         let payload = event.message.quick_reply.payload;
 
         if (payload == "<HEALTH_GOAL_POOR>") {
+          // snarky comment on the Goal
           bot.commentPoorGoal(sender, text)
+          // insert user into DB with health Goal
           db.insertUser(sender, text);
         }
         if (payload == "<HEALTH_GOAL_OK>") {
@@ -69,6 +71,12 @@ router.post('/webhook/', (req, res) => {
           db.insertUser(sender, text);
         }
 
+      } else if (text.toLowerCase().includes("meal") or text.toLowerCase().includes("add")) {
+        bot.addMeal(sender);
+
+      // unable to read, prompt user for appropriate text
+      } else {
+        bot.help(sender);
       }
 
 
@@ -191,8 +199,8 @@ router.post('/webhook/', (req, res) => {
         bot.getStarted(sender);
       }
 
-      if (payload == "<HEALTH_GOAL_POOR>") {
-        bot.sendMessage(sender, {"text": "You suck"})
+      if (payload == "<ADD_MEAL>") {
+        bot.addMeal(sender);
       }
 
     }

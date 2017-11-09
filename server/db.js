@@ -7,32 +7,12 @@ module.exports = {
     // get reference for user from db
     const userRef = db.ref('users/'+ userID);
     userRef.set({
-      healthGoal: goal,
+      healthGoal: parseInt(goal),
       totalAverage: 0,
       weeklyAverage: 0,
       dailyAverage: 0
     });
 
-  },
-
-  getUser: (userID) => {
-    const userRef = db.ref('users/'+ userID);
-    userRef.once("value", (snapshot) => {
-      if (snapshot.val() == null) {
-        userRef.set({
-          snackLimit: 0,
-          healthGoal: 0,
-          totalAverage: 0,
-          weeklyAverage: 0,
-          dailyAverage: 0,
-          meals: [{"name": "", "score": 0}], // need to add new
-          snacks: -10
-        })
-        return -1;
-      } else {
-        return 1;
-      }
-    })
   },
 
   setSnackLimit: (user, snackLimit) => {
