@@ -53,7 +53,11 @@ router.post('/webhook/', (req, res) => {
     if (event.message && event.message.text) {
       let text = event.message.text;
       let payload = event.message.payload;
-      bot.sendMessage(sender, {"text":"hi"})
+
+      if (payload == "<HEALTH_GOAL_POOR>") {
+        bot.sendMessage(sender, {"text": "You suck"})
+      }
+
       // // get referene for user from db
       // const userRef = db.ref('users/'+ sender);
       //
@@ -169,6 +173,11 @@ router.post('/webhook/', (req, res) => {
     } else if (event.postback && event.postback.payload) {
       let payload = event.postback.payload;
       bot.sendMessage(sender, {"text":"hello"})
+
+      if (payload == "<GET_STARTED_PAYLOAD>") {
+        bot.getStarted(sender);
+      }
+
     }
 
      else {

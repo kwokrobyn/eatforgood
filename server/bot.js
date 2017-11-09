@@ -30,6 +30,66 @@ module.exports = {
      })
   }, // END OF SENDTEXT
 
+  getStarted: (sender) => {
+
+    let messageData = {
+      "text": "Welcome to Eat For Good! Get started by choosing a health goal. (1 = least healthy, 10 = most healthy)",
+      "quick_replies": [
+        {
+          "content_type":"text",
+          "title":"1",
+          "payload":"<HEALTH_GOAL_POOR>"
+        },
+        {
+          "content_type":"text",
+          "title":"2",
+          "payload":"<HEALTH_GOAL_POOR>"
+        },
+        {
+          "content_type":"text",
+          "title":"3",
+          "payload":"<HEALTH_GOAL_POOR>"
+        },
+        {
+          "content_type":"text",
+          "title":"4",
+          "payload":"<HEALTH_GOAL_POOR>"
+        },
+        {
+          "content_type":"text",
+          "title":"5",
+          "payload":"<HEALTH_GOAL_OK>"
+        },
+        {
+          "content_type":"text",
+          "title":"6",
+          "payload":"<HEALTH_GOAL_OK>"
+        },
+        {
+          "content_type":"text",
+          "title":"7",
+          "payload":"<HEALTH_GOAL_OK>"
+        },
+        {
+          "content_type":"text",
+          "title":"8",
+          "payload":"<HEALTH_GOAL_GOOD>"
+        },
+        {
+          "content_type":"text",
+          "title":"9",
+          "payload":"<HEALTH_GOAL_GOOD>"
+        },
+        {
+          "content_type":"text",
+          "title":"10",
+          "payload":"<HEALTH_GOAL_GOOD>"
+        }
+      ]
+    }
+
+  },
+
   welcome: (sender) => {
       let welcMsgData = {"text": "Hi, I'm world-renowned nutritionist and health guru, Scott Heng! I'm here to help you reach your goal of being a healthy eater! We'll be keeping track of your meals every day, and you will grade your meals on how healthy they are, on a scale from 1 to 10, with 1 being unhealthy, like oreos,and 10 being very healthy, like an organic, free-range, non-GMO salad without dressing!"}
       module.exports.sendMessage(sender, welcMsgData)
