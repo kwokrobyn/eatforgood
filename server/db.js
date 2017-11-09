@@ -35,7 +35,7 @@ module.exports = {
   addMeal: (userID, level, mealType) => {
     const date = module.exports.parseDate();
     const mealID = uuid.v4();
-    const mealRef = db.ref('users/' + userID + date + mealID);
+    const mealRef = db.ref('users/' + userID + '/' + date + '/' + mealID);
     dayRef.set({
       mealType: mealType,
       healthLevel: level
