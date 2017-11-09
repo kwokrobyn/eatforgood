@@ -110,7 +110,7 @@ module.exports = {
 
   help: (sender) => {
     let messageData = {
-      "text": "'add' a meal, 'check' your progress, or simply choose from the options below. "
+      "text": "'add' a meal, 'check' your progress, or simply choose from the options below. ",
       "quick_replies": [
         {
           "content_type":"text",
@@ -134,7 +134,7 @@ module.exports = {
 
   addMeal: (sender) => {
     let messageData = {
-      "text": "What meal is this?"
+      "text": "What meal is this?",
       "quick_replies": [
         {
           "content_type":"text",
