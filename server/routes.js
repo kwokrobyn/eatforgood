@@ -54,6 +54,9 @@ router.post('/webhook/', (req, res) => {
       let text = event.message.text;
       let payload = event.message.payload;
 
+      if (payload == "<HEALTH_GOAL_POOR>") {
+        bot.sendMessage(sender, {"text": "You suck"})
+      }
 
 
       // // get referene for user from db
