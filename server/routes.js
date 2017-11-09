@@ -49,9 +49,8 @@ router.post('/webhook/', (req, res) => {
     let event = req.body.entry[0].messaging[i]
     let sender = event.sender.id
 
-    if event.postback {
-      bot.sendMessage(sender, {"text": "hello yooyo"});
-    }
+    bot.sendMessage(sender, {"text": event});
+
 
     if (event.message && event.message.text) {
       let text = event.message.text;
