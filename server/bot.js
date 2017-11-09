@@ -106,7 +106,7 @@ module.exports = {
       "text": "You chose " + goal + ". That's the spirit! "
     }
     module.exports.sendMessage(sender, messageData);
-  }
+  },
 
 
     setSnackLimit: (sender) =>{
