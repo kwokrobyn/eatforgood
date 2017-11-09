@@ -40,7 +40,7 @@ module.exports = {
       healthLevel: parseInt(level),
       date: date
     });
-    module.exports.updateAverage(userID, level);
+    
   },
 
   updateAverage: (userID, entry) => {

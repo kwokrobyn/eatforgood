@@ -91,6 +91,7 @@ router.post('/webhook/', (req, res) => {
         if (payload == "<ADD_BREAKFAST_POOR>") {
           bot.addMeal2(sender, text, "Poor", "Breakfast")
           db.addMeal(sender, text, "Breakfast")
+          db.updateAverage(sender, parseInt(text));
         }
         else if (payload == "<ADD_LUNCH_POOR>") {
           bot.addMeal2(sender, text, "Poor", "Lunch")
