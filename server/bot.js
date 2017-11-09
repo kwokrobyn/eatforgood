@@ -1,6 +1,7 @@
 const express = require('express')
 const accesstoken = "EAAXqgZAW0uwoBAJ0ZCtrVdF07EN0ZAx3EeZAWZBQdi4TRvo29qNLZCDiiQurLKuy43mqpkDQrTMMcu1LpcOlYIkpiluUeyPGCKXd9qt644DlsTB168D673TWaezOvcqVmUhgjgAreZC9dT7RjMlllYipxlsDfnq18qD5wpastC6kwZDZD"
 const request = require('request')
+const db = require('./db')
 
 
 module.exports = {
@@ -181,59 +182,59 @@ module.exports = {
         {
           "content_type":"text",
           "title":"1",
-          "payload":"<ADD_MEAL_POOR>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "_POOR>"
         },
         {
           "content_type":"text",
           "title":"2",
-          "payload":"<ADD_MEAL_POOR>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "_POOR>"
         },
         {
           "content_type":"text",
           "title":"3",
-          "payload":"<ADD_MEAL_POOR>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "_POOR>"
         },
         {
           "content_type":"text",
           "title":"4",
-          "payload":"<ADD_MEAL_POOR>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "_POOR>"
         },
         {
           "content_type":"text",
           "title":"5",
-          "payload":"<ADD_MEAL_OK>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "OK>"
         },
         {
           "content_type":"text",
           "title":"6",
-          "payload":"<ADD_MEAL_OK>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "OK>"
         },
         {
           "content_type":"text",
           "title":"7",
-          "payload":"<ADD_MEAL_OK>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "OK>"
         },
         {
           "content_type":"text",
           "title":"8",
-          "payload":"<ADD_MEAL_GOOD>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "GOOD>"
         },
         {
           "content_type":"text",
           "title":"9",
-          "payload":"<ADD_MEAL_GOOD>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "GOOD>"
         },
         {
           "content_type":"text",
           "title":"10",
-          "payload":"<ADD_MEAL_GOOD>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "GOOD>"
         }
       ]
     }
     module.exports.sendMessage(sender, messageData);
   },
 
-  addMeal2: (sender, level, levelComment) => {
+  addMeal2: (sender, level, levelComment, mealType) => {
     let reply;
     if (levelComment == "Poor") {
       reply = "You chose " + level + ". Tsk...you're better than that!"
@@ -247,7 +248,6 @@ module.exports = {
       "text": reply
     }
     module.exports.sendMessage(sender, messageData);
-
   },
 
   setSnackLimit: (sender) =>{

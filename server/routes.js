@@ -88,17 +88,53 @@ router.post('/webhook/', (req, res) => {
           bot.addMeal1(sender, "Snack");
         }
 
-        if (payload == "<ADD_MEAL_POOR>") {
-          bot.addMeal2(sender, text, "Poor")
-          //db.addMeal(sender, text);
+        if (payload == "<ADD_BREAKFAST_POOR>") {
+          bot.addMeal2(sender, text, "Poor", "Breakfast")
+          db.addMeal(sender, text, "Breakfast")
         }
-        if (payload == "<HEALTH_GOAL_OK>") {
-          bot.addMeal2(sender, text, "OK")
-          //db.addMeal(sender, text);
+        if (payload == "<ADD_LUNCH_POOR>") {
+          bot.addMeal2(sender, text, "Poor", "Lunch")
+          db.addMeal(sender, text, "Lunch")
         }
-        if (payload == "<HEALTH_GOAL_GOOD>") {
-          bot.addMeal2(sender, text, "Good")
-          //db.addMeal(sender, text);
+        if (payload == "<ADD_DINNER_POOR>") {
+          bot.addMeal2(sender, text, "Poor", "Dinner")
+          db.addMeal(sender, text, "Dinner")
+        }
+        if (payload == "<ADD_SNACK_POOR>") {
+          bot.addMeal2(sender, text, "Poor", "Snack")
+          db.addMeal(sender, text, "Snack")
+        }
+        if (payload == "<ADD_BREAKFAST_OK>") {
+          bot.addMeal2(sender, text, "OK", "Breakfast")
+          db.addMeal(sender, text, "Breakfast")
+        }
+        if (payload == "<ADD_LUNCH_OK>") {
+          bot.addMeal2(sender, text, "OK", "Lunch")
+          db.addMeal(sender, text, "Lunch")
+        }
+        if (payload == "<ADD_DINNER_OK>") {
+          bot.addMeal2(sender, text, "OK", "Dinner")
+          db.addMeal(sender, text, "Dinner")
+        }
+        if (payload == "<ADD_SNACK_OK>") {
+          bot.addMeal2(sender, text, "OK", "Snack")
+          db.addMeal(sender, text, "Snack")
+        }
+        if (payload == "<ADD_BREAKFAST_GOOD>") {
+          bot.addMeal2(sender, text, "Good", "Breakfast")
+          db.addMeal(sender, text, "Breakfast")
+        }
+        if (payload == "<ADD_LUNCH_GOOD>") {
+          bot.addMeal2(sender, text, "Good", "Lunch")
+          db.addMeal(sender, text, "Lunch")
+        }
+        if (payload == "<ADD_DINNER_GOOD>") {
+          bot.addMeal2(sender, text, "Good", "Dinner")
+          db.addMeal(sender, text, "Dinner")
+        }
+        if (payload == "<ADD_SNACK_GOOD>") {
+          bot.addMeal2(sender, text, "Good", "Snack")
+          db.addMeal(sender, text, "Snack")
         }
 
       } else if (text.toLowerCase().includes("meal") || text.toLowerCase().includes("add")) {
