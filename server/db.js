@@ -16,7 +16,7 @@ module.exports = {
     if(mm<10){
       mm='0'+mm;
     }
-    var today = dd+mm+yyyy;
+    var today = dd+'/'+mm+'/'+yyyy;
     return today;
   },
 
@@ -35,11 +35,11 @@ module.exports = {
   addMeal: (userID, level, mealType) => {
     const date = module.exports.parseDate();
     const mealID = uuid.v4();
-    const mealRef = db.ref('users/' + userID + '/meals/' + date);
+    const mealRef = db.ref('users/' + userID + '/meals/' + mealID);
     mealRef.set({
       mealType: mealType,
-      healthLevel: parseInt(level),
-      mealID: mealID
+      healthLevel: level,
+      date: date
     });
   },
 
