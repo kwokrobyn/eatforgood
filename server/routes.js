@@ -54,7 +54,8 @@ router.post('/webhook/', (req, res) => {
       let text = event.message.text;
       let payload = event.message.payload;
 
-      if (text == "2") {
+      if (event.message.quick_reply) {
+        let payload = event.message.quick_reply.payload;
         bot.sendMessage(sender, {"text": payload})
       }
 

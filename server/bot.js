@@ -37,7 +37,7 @@ module.exports = {
         {
           "content_type":"text",
           "title":"1",
-          "payload":"<HEALTH_GOAL_POOR>"
+          "payload":"HELLO123"
         },
         {
           "content_type":"text",
