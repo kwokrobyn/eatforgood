@@ -204,32 +204,32 @@ module.exports = {
         {
           "content_type":"text",
           "title":"5",
-          "payload":"<ADD_" + mealType.toUpperCase()+ "OK>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "_OK>"
         },
         {
           "content_type":"text",
           "title":"6",
-          "payload":"<ADD_" + mealType.toUpperCase()+ "OK>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "_OK>"
         },
         {
           "content_type":"text",
           "title":"7",
-          "payload":"<ADD_" + mealType.toUpperCase()+ "OK>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "_OK>"
         },
         {
           "content_type":"text",
           "title":"8",
-          "payload":"<ADD_" + mealType.toUpperCase()+ "GOOD>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "_GOOD>"
         },
         {
           "content_type":"text",
           "title":"9",
-          "payload":"<ADD_" + mealType.toUpperCase()+ "GOOD>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "_GOOD>"
         },
         {
           "content_type":"text",
           "title":"10",
-          "payload":"<ADD_" + mealType.toUpperCase()+ "GOOD>"
+          "payload":"<ADD_" + mealType.toUpperCase()+ "_GOOD>"
         }
       ]
     }
