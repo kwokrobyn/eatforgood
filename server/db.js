@@ -43,7 +43,7 @@ module.exports = {
       const userRef = db.ref('users/' + userID);
       userRef.once("value", (snapshot) => {
         const newCount = snapshot.val().mealCount + 1
-        const newAve = (snapshot.val().totalAverage * (newCount - 1) + entry)/parseFloat(newCount)
+        const newAve = (snapshot.val().totalAverage * (newCount - 1) + parseInt(level))/parseFloat(newCount)
         userRef.update({
           mealCount: newCount,
           totalAverage: newAve
