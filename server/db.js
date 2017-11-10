@@ -39,7 +39,9 @@ module.exports = {
       mealType: mealType,
       healthLevel: parseInt(level),
       date: date
-    });
+    }).then({
+      module.exports.updateAverage(userID, parseInt(level));
+    })
 
   },
 
