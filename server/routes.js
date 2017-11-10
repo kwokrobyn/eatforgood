@@ -147,6 +147,36 @@ router.post('/webhook/', (req, res) => {
       } else if (text.toLowerCase().includes("check")) {
         bot.checkProgress(sender);
       // unable to read, prompt user for appropriate text
+      } else if (len(text.split()) === 3 ) {
+        const textArray = text.split();
+        if (textArray[0].toLowerCase() === "add") {
+
+          if (textArray[1].toLowerCase() === "breakfast") {
+            let mealType = "Breakfast";
+          } else if (textArray[1].toLowerCase() === "lunch") {
+            let mealType = "Lunch";
+          } else if (textArray[1].toLowerCase() === "dinner") {
+            let mealType = "Dinner";
+          } else if (textArray[1].toLowerCase() === "snack") {
+            let mealType = "Snack";
+          }
+
+          if (mealType) {
+            let level = parseInt(textArray[2])
+            if (level <= 4) {
+              bot.addMeal2(sender, text, "Poor", mealType)
+              db.addMeal(sender, text, mealType);
+            } else if (level >= 5 && level <= 7) {
+              bot.addMeal2(sender, text, "OK", mealType)
+              db.addMeal(sender, text, mealType);
+            } else {
+              bot.addMeal2(sender, text, "Good", mealType)
+              db.addMeal(sender, text, mealType);
+            }
+          }
+
+
+        }
       } else {
         bot.help(sender);
       }
