@@ -150,7 +150,7 @@ router.post('/webhook/', (req, res) => {
     } else if ((text.split(" ")).length === 3 ) {
         const textArray = text.split(" ");
         if (textArray[0].toLowerCase() === "add") {
-
+          let mealType;
           if (textArray[1].toLowerCase() === "breakfast") {
             let mealType = "Breakfast";
           } else if (textArray[1].toLowerCase() === "lunch") {
