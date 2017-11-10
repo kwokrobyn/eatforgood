@@ -148,7 +148,7 @@ router.post('/webhook/', (req, res) => {
         bot.checkProgress(sender);
       // unable to read, prompt user for appropriate text
     } else if ((text.split(" ")).length === 3 ) {
-        const textArray = text.split();
+        const textArray = text.split(" ");
         if (textArray[0].toLowerCase() === "add") {
 
           if (textArray[1].toLowerCase() === "breakfast") {
