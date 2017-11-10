@@ -152,13 +152,13 @@ router.post('/webhook/', (req, res) => {
         if (textArray[0].toLowerCase() === "add") {
           let mealType = "NONE";
           if (textArray[1].toLowerCase() === "breakfast") {
-            let mealType = "Breakfast";
+            mealType = "Breakfast";
           } else if (textArray[1].toLowerCase() === "lunch") {
-            let mealType = "Lunch";
+            mealType = "Lunch";
           } else if (textArray[1].toLowerCase() === "dinner") {
-            let mealType = "Dinner";
+            mealType = "Dinner";
           } else if (textArray[1].toLowerCase() === "snack") {
-            let mealType = "Snack";
+            mealType = "Snack";
           }
 
           if (mealType != "NONE") {
