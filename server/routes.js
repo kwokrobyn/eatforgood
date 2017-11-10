@@ -142,7 +142,7 @@ router.post('/webhook/', (req, res) => {
         }
 
       // quick replies end
-      } else if (text.toLowerCase().includes("meal") || text.toLowerCase().includes("add")) {
+    } else if (text.toLowerCase().includes("meal") || text.toLowerCase().includes("add") || len(text.split()) !== 3) {
         bot.addMeal(sender);
       } else if (text.toLowerCase().includes("check")) {
         bot.checkProgress(sender);
@@ -174,8 +174,6 @@ router.post('/webhook/', (req, res) => {
               db.addMeal(sender, text, mealType);
             }
           }
-
-
         }
       } else {
         bot.help(sender);
