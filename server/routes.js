@@ -150,7 +150,7 @@ router.post('/webhook/', (req, res) => {
     } else if ((text.split(" ")).length === 3 ) {
         const textArray = text.split(" ");
         if (textArray[0].toLowerCase() === "add") {
-          let mealType;
+          let mealType == "NONE";
           if (textArray[1].toLowerCase() === "breakfast") {
             let mealType = "Breakfast";
           } else if (textArray[1].toLowerCase() === "lunch") {
@@ -161,7 +161,7 @@ router.post('/webhook/', (req, res) => {
             let mealType = "Snack";
           }
 
-          if (mealType) {
+          if (mealType != "NONE") {
             let level = parseInt(textArray[2])
             if (level <= 4) {
               bot.addMeal2(sender, text, "Poor", mealType)
