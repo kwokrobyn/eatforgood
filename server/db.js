@@ -39,8 +39,16 @@ module.exports = {
       mealType: mealType,
       healthLevel: parseInt(level),
       date: date
-    }).then({
-      module.exports.updateAverage(userID, parseInt(level));
+    }).then(() => {
+      const userRef = db.ref('users/' + userID);
+      userRef.once("value", (snapshot) => {
+        const newCount = snapshot.val().mealCount + 1
+        const newAve = (snapshot.val().totalAverage * (newCount - 1) + entry)/parseFloat(newCount)
+        userRef.update({
+          mealCount: newCount,
+          totalAverage: newAve
+        });
+      });
     })
 
   },
