@@ -259,7 +259,7 @@ module.exports = {
       const curr = snapshot.val().totalAverage;
 
       let messageData = {
-        "text": "Your goal is " + goal + ", your current score is " + curr
+        "text": "Your goal is " + goal + ", your current score is " + curr.toFixed(2)
       }
       module.exports.sendMessage(sender, messageData);
     })
