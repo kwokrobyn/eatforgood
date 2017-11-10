@@ -43,6 +43,7 @@ router.post('/webhook/', (req, res) => {
 
   let messaging_events = req.body.entry[0].messaging
 
+  // although this is an array, it only contains one message
   for (let i = 0; i < messaging_events.length; i++) {
     let event = req.body.entry[0].messaging[i]
     let sender = event.sender.id;
@@ -64,6 +65,10 @@ router.post('/webhook/', (req, res) => {
           bot.checkProgress(sender);
         }
 
+
+        // Get Started: Init Health Goal
+        // - inserts user with health goal in DB
+        // - replies with comment based on set health goal
         if (payload == "<HEALTH_GOAL_POOR>") {
           // snarky comment on the Goal
           bot.commentPoorGoal(sender, text)
@@ -79,6 +84,8 @@ router.post('/webhook/', (req, res) => {
           db.insertUser(sender, text);
         }
 
+
+        // ADD MEAL 1: received meal type, to prompt for health level
         if (payload == "<ADD_MEAL_BREAKFAST>") {
           bot.addMeal1(sender, "Breakfast");
         }
@@ -92,187 +99,57 @@ router.post('/webhook/', (req, res) => {
           bot.addMeal1(sender, "Snack");
         }
 
+
+        // ADD MEAL 2: received health level
+        // - add meal + healthLevel to DB
+        // - replies with comment based on health level
         if (payload == "<ADD_BREAKFAST_POOR>") {
           bot.addMeal2(sender, text, "Poor", "Breakfast")
           db.addMeal(sender, text, "Breakfast");
-          //db.updateAverage(sender, parseInt(text));
-        }
-        else if (payload == "<ADD_LUNCH_POOR>") {
+        } else if (payload == "<ADD_LUNCH_POOR>") {
           bot.addMeal2(sender, text, "Poor", "Lunch")
           db.addMeal(sender, text, "Lunch")
-          db.updateAverage(sender, parseInt(text));
-        }
-        else if (payload == "<ADD_DINNER_POOR>") {
+        } else if (payload == "<ADD_DINNER_POOR>") {
           bot.addMeal2(sender, text, "Poor", "Dinner")
           db.addMeal(sender, text, "Dinner")
-          db.updateAverage(sender, parseInt(text));
-        }
-        else if (payload == "<ADD_SNACK_POOR>") {
+        } else if (payload == "<ADD_SNACK_POOR>") {
           bot.addMeal2(sender, text, "Poor", "Snack")
           db.addMeal(sender, text, "Snack")
-          db.updateAverage(sender, parseInt(text));
-        }
-        else if (payload == "<ADD_BREAKFAST_OK>") {
+        } else if (payload == "<ADD_BREAKFAST_OK>") {
           bot.addMeal2(sender, text, "OK", "Breakfast")
           db.addMeal(sender, text, "Breakfast")
-          db.updateAverage(sender, parseInt(text));
-        }
-        else if (payload == "<ADD_LUNCH_OK>") {
+        } else if (payload == "<ADD_LUNCH_OK>") {
           bot.addMeal2(sender, text, "OK", "Lunch")
           db.addMeal(sender, text, "Lunch")
-          db.updateAverage(sender, parseInt(text));
-        }
-        else if (payload == "<ADD_DINNER_OK>") {
+        } else if (payload == "<ADD_DINNER_OK>") {
           bot.addMeal2(sender, text, "OK", "Dinner")
           db.addMeal(sender, text, "Dinner")
-          db.updateAverage(sender, parseInt(text));
-        }
-        else if (payload == "<ADD_SNACK_OK>") {
+        } else if (payload == "<ADD_SNACK_OK>") {
           bot.addMeal2(sender, text, "OK", "Snack")
           db.addMeal(sender, text, "Snack")
-          db.updateAverage(sender, parseInt(text));
-        }
-        else if (payload == "<ADD_BREAKFAST_GOOD>") {
+        } else if (payload == "<ADD_BREAKFAST_GOOD>") {
           bot.addMeal2(sender, text, "Good", "Breakfast")
           db.addMeal(sender, text, "Breakfast")
-          db.updateAverage(sender, parseInt(text));
-        }
-        else if (payload == "<ADD_LUNCH_GOOD>") {
+        } else if (payload == "<ADD_LUNCH_GOOD>") {
           bot.addMeal2(sender, text, "Good", "Lunch")
           db.addMeal(sender, text, "Lunch")
-          db.updateAverage(sender, parseInt(text));
-        }
-        else if (payload == "<ADD_DINNER_GOOD>") {
+        } else if (payload == "<ADD_DINNER_GOOD>") {
           bot.addMeal2(sender, text, "Good", "Dinner")
           db.addMeal(sender, text, "Dinner")
-          db.updateAverage(sender, parseInt(text));
-        }
-        else if (payload == "<ADD_SNACK_GOOD>") {
+        } else if (payload == "<ADD_SNACK_GOOD>") {
           bot.addMeal2(sender, text, "Good", "Snack")
-          db.addMeal(sender, text, "Snack")
-          db.updateAverage(sender, parseInt(text));
+          db.addMeal(sender, text, "Snack");
         }
 
+      // quick replies end
       } else if (text.toLowerCase().includes("meal") || text.toLowerCase().includes("add")) {
         bot.addMeal(sender);
-
+      } else if (text.toLowerCase().includes("check")) {
+        bot.checkProgress(sender);
       // unable to read, prompt user for appropriate text
       } else {
         bot.help(sender);
       }
-
-
-      // // get referene for user from db
-      // const userRef = db.ref('users/'+ sender);
-      //
-      // userRef.once("value", (snapshot) => {
-      //   // if user does not exist
-      //   if (snapshot.val() == null) {
-      //     userRef.set({
-      //       snackLimit: 0,
-      //       healthGoal: 0,
-      //       totalAverage: 0,
-      //       goalsSet: false,
-      //       currentlySetting: 'none',
-      //       currentString: 'hi',
-      //       weeklyAverage: 0,
-      //       dailyAverage: 0,
-      //       snacks: -10
-      //     }).then(() => {
-      //       bot.welcome(sender);
-      //       bot.setHealthGoal(sender);
-      //     })
-      //   }
-        // if user exists
-      //   else {
-      //     if (snapshot.val().goalsSet == false) {
-      //       // curr is healthGoal, set it
-      //       if (snapshot.val().healthGoal == 0) {
-      //
-      //         userRef.update({
-      //           healthGoal: text
-      //         })
-      //         bot.setSnackLimit(sender);
-      //         // curr is snackLimit, set it
-      //       } else if (snapshot.val().snackLimit == 0) {
-      //
-      //         userRef.update({
-      //           snackLimit: text,
-      //           goalsSet: true
-      //         })
-      //         bot.selectOption(sender);
-      //     } else { // goalsSet == true, event = Meal or Snack
-      //       if (text.toLowerCase() == "Meal") {
-      //         userRef.update({
-      //           currentlySetting: 'mealname'
-      //         })
-      //         bot.addMealName(sender);
-      //       }
-      //
-      //       if (snapshot.val().currentlySetting == 'mealname') {
-      //         userRef.update({
-      //           currentlySetting: 'mealscore'
-      //         })
-      //         bot.addMealScore(sender, snapshot.val().currentString);
-      //       }
-      //
-      //       if (snapshot.val().currentlySetting == 'mealscore') {
-      //         const uid = uuid.v4();
-      //         const mealRef = db.ref('users/' + sender + '/meals/' + uid);
-      //
-      //         //db add object
-      //         mealRef.set({
-      //           name: payload.name,
-      //           score: payload.score
-      //         })
-      //       }
-      //
-      //     }
-      //
-      //   } // end of goals not set
-      // } // end of else
-            // if (i > 0 && prevMessage.payload.category == "Meal") {
-            //   // if previous message is selectOption answer and current message is meal string
-            //   if (prevMessage.payload.score == 0) {
-            //     bot.addMealScore(sender, text);
-            //   }
-            // }
-            //
-            // if (payload != null) {
-            //
-            //   if (payload.category == null) {
-            //     bot.selectOption(sender);
-            //
-            //   if (payload.category == "Meal") {
-            //     if(payload.name == ""){
-            //       bot.addMealName(sender);
-            //     }
-            //     // else if (payload.score == 0){
-            //     //   bot.addMealScore(sender, payload.name);
-            //     // }
-            //     else {
-            //       const uid = uuid.v4();
-            //       const mealRef = db.ref('users/' + sender + '/meals/' + uid);
-            //
-            //       //db add object
-            //       mealRef.set({
-            //         name: payload.name,
-            //         score: payload.score
-            //       })
-            //
-            //       //report average score, vs goal
-            //
-            //     }
-            //   }
-            //   if (payload.category == "Snack") {
-            //     // get value from db, decrement
-            //     // if snackCounter <= 0, public shaming
-            //   }
-            // }
-            //
-            //   }
-      //});
-
     // postback (e.g. Get Started)
     } else if (event.postback && event.postback.payload) {
       let payload = event.postback.payload;

@@ -53,25 +53,4 @@ module.exports = {
 
   },
 
-  updateAverage: (userID, entry) => {
-    const userRef = db.ref('users/' + userID);
-    userRef.once("value", (snapshot) => {
-      const newCount = snapshot.val().mealCount + 1
-      const newAve = (snapshot.val().totalAverage * (newCount - 1) + entry)/parseFloat(newCount)
-      userRef.update({
-        mealCount: newCount,
-        totalAverage: newAve
-      });
-    });
-  }
-
-  //setMeal: (user, mealObj) => {
-  //   const userRef = db.ref('users/' + user.id);
-  //   userRef.once("value", (snapshot) => {
-  //     userRef.set({
-  //       meals: mealObj
-  //     });
-  //   })
-  // }
-
 }
