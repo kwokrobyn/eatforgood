@@ -164,14 +164,14 @@ router.post('/webhook/', (req, res) => {
           if (mealType != "NONE") {
             let level = parseInt(textArray[2])
             if (level <= 4) {
-              bot.addMeal2(sender, text, "Poor", mealType)
-              db.addMeal(sender, text, mealType);
+              bot.addMeal2(sender, level, "Poor", mealType)
+              db.addMeal(sender, level, mealType);
             } else if (level >= 5 && level <= 7) {
-              bot.addMeal2(sender, text, "OK", mealType)
-              db.addMeal(sender, text, mealType);
+              bot.addMeal2(sender, level, "OK", mealType)
+              db.addMeal(sender, level, mealType);
             } else {
-              bot.addMeal2(sender, text, "Good", mealType)
-              db.addMeal(sender, text, mealType);
+              bot.addMeal2(sender, level, "Good", mealType)
+              db.addMeal(sender, level, mealType);
             }
           }
         }
