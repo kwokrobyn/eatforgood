@@ -126,10 +126,15 @@ module.exports = {
           "payload":"<CHECK_PROGRESS>"
         },
         {
+          "content_type": "text",
+          "title":"Today's meals",
+          "payload":"<CHECK_TODAY>"
+        },
+        {
           "content_type":"text",
           "title":"Cancel",
           "payload":"<CANCEL>"
-        },
+        }
       ]
     }
     module.exports.sendMessage(sender, messageData);
@@ -250,6 +255,16 @@ module.exports = {
       "text": reply
     }
     module.exports.sendMessage(sender, messageData);
+  },
+
+  checkToday: (sender) => {
+    db.getMealsOfDay(sender, (result) => {
+      let messageData = {
+        "text": result
+      }
+      module.exports.sendMessage(sender, messageData);
+    })
+
   },
 
   checkProgress: (sender) => {

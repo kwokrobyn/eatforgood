@@ -53,4 +53,12 @@ module.exports = {
 
   },
 
+  getMealsOfDay: (userID, cb) => {
+    const today = module.exports.parseDate();
+    const mealRef = db.ref('users/' + userID + '/meals/');
+    todayMealRef.orderByChild("date").equalTo(today).once("value", (snapshot) => {
+      cb(snapshot.val());
+    });
+  }
+
 }

@@ -65,6 +65,10 @@ router.post('/webhook/', (req, res) => {
           bot.checkProgress(sender);
         }
 
+        if (payload == "<CHECK_TODAY>") {
+          bot.checkToday(sender);
+        }
+
 
         // Get Started: Init Health Goal
         // - inserts user with health goal in DB
