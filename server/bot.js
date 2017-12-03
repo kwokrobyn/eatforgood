@@ -266,8 +266,8 @@ module.exports = {
       }
 
       let messageData = {
-        "text": dailyReport
-      }//
+        "text": JSON.stringify(Object.entries(JSON.parse(result)))
+      }
       module.exports.sendMessage(sender, messageData);
     })
 
