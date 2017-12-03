@@ -260,20 +260,17 @@ module.exports = {
   checkToday: (sender) => {
 
     db.getMealsOfDay(sender, (result) => {
+      const dailyReport = "Your Meals For The Day: \n"
+      for (var meal in result) {
+        dailyReport += JSON.stringify(meal.mealType) + " (Score: " + JSON.stringify(meal.healthLevel) + ")\n"
+      }
+
       let messageData = {
-        "text": JSON.stringify(result)
+        "text": dailReport
       }
       module.exports.sendMessage(sender, messageData);
     })
 
-    // const today = db.parseDate();
-    // const mealRef = directdb.ref('users/' + sender + '/meals/' + today);
-    // mealRef.once("value", (snapshot) => {
-    //     let messageData = {
-    //       "text": JSON.stringify(snapshot.val())
-    //     }
-    //     module.exports.sendMessage(sender, messageData);
-    // });
   },
 
   checkProgress: (sender) => {
