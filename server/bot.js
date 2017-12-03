@@ -261,10 +261,14 @@ module.exports = {
 
     db.getMealsOfDay(sender, (result) => {
       var dailyReport = "Your Meals For The Day: \n"
-
+      var arr = []
       for (var meal in result) {
         //dailyReport += JSON.stringify(meal[1].mealType) + " (Score: " + JSON.stringify(meal[1].healthLevel) + ")\n"
-        dailyReport += JSON.stringify(meal)
+        arr.push(JSON.stringify(meal))
+      }
+
+      for (var i=0;i<arr.length;i++) {
+        dailyReport += JSON.stringify(result[arr[i]])
       }
 
       let messageData = {
