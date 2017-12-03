@@ -262,9 +262,7 @@ module.exports = {
     db.getMealsOfDay(sender, (result) => {
       const dailyReport = "Your Meals For The Day: \n"
       for (var meal in result) {
-        if meal.hasOwnProperty(mealType) {
-          dailyReport += JSON.stringify(meal.mealType) + " (Score: " + JSON.stringify(meal.healthLevel) + ")\n"
-        }
+        dailyReport += JSON.stringify(meal.mealType) + " (Score: " + JSON.stringify(meal.healthLevel) + ")\n"
       }
 
       let messageData = {
