@@ -267,7 +267,7 @@ module.exports = {
 
       let messageData = {
         "text": dailyReport
-      }
+      }//
       module.exports.sendMessage(sender, messageData);
     })
 
