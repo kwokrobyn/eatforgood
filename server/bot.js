@@ -258,7 +258,7 @@ module.exports = {
   },
 
   checkToday: (sender) => {
-    const today = module.exports.parseDate();
+    const today = db.parseDate();
     const mealRef = directdb.ref('users/' + sender + '/meals/' + today);
     mealRef.once("value", (snapshot) => {
         let messageData = {
