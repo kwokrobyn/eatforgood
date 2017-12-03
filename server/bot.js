@@ -272,7 +272,7 @@ module.exports = {
       }
 
       let messageData = {
-        "text": dailyReport
+        "text": JSON.stringify(result)
       }
       module.exports.sendMessage(sender, messageData);
     })
