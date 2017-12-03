@@ -260,22 +260,11 @@ module.exports = {
   checkToday: (sender) => {
 
     db.getMealsOfDay(sender, (result) => {
-      var dailyReport = "Your Meals For The Day: \n"
+      var dailyReport = "Here's what you ate today: \n"
 
       result.forEach((child) => {
-        dailyReport += JSON.stringify(child.val().mealType) + " (Score: " + JSON.stringify(child.val().healthLevel) + ")\n"
+        dailyReport += child.val().mealType + " (Score: " + JSON.stringify(child.val().healthLevel) + ")\n"
       })
-
-      // var arr = []
-      // ret = JSON.parse(result)
-      // for (var meal in ret) {
-      //   //dailyReport += JSON.stringify(meal[1].mealType) + " (Score: " + JSON.stringify(meal[1].healthLevel) + ")\n"
-      //   arr.push(JSON.stringify(meal))
-      // }
-      //
-      // for (var i=0;i<arr.length;i++) {
-      //   dailyReport += JSON.stringify(ret[JSON.stringify(arr[i].slice(2, -2))])
-      // }
 
       let messageData = {
         "text": dailyReport
