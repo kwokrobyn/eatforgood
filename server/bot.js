@@ -262,11 +262,13 @@ module.exports = {
     db.getMealsOfDay(sender, (result) => {
       const dailyReport = "Your Meals For The Day: \n"
       for (var meal in result) {
-        dailyReport += JSON.stringify(meal.mealType) + " (Score: " + JSON.stringify(meal.healthLevel) + ")\n"
+        if meal.hasOwnProperty(mealType) {
+          dailyReport += JSON.stringify(meal.mealType) + " (Score: " + JSON.stringify(meal.healthLevel) + ")\n"
+        }
       }
 
       let messageData = {
-        "text": dailReport
+        "text": dailyReport
       }
       module.exports.sendMessage(sender, messageData);
     })
