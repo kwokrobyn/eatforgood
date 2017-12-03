@@ -57,7 +57,7 @@ module.exports = {
     const today = module.exports.parseDate();
     const mealRef = db.ref('users/' + userID + '/meals/' + today);
     mealRef.once("value", (snapshot) => {
-        cb(snapshot.val());
+        cb(JSON.stringify(snapshot.val()));
     });
   }
 
