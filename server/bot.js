@@ -279,9 +279,38 @@ module.exports = {
     userRef.once("value", (snapshot) => {
       const goal = snapshot.val().healthGoal;
       const curr = snapshot.val().totalAverage;
+      var reply = "";
+      if (curr > goal) {
+        goodArr = [
+          "Great Job! You are achieving your goal. Are you sure you’re telling the truth? Don’t you lie to me now.",
+          "Nice! You are achieving your goal. Remember not to give up now, I know this isn’t your first time trying a healthy diet.",
+          "Awesome! You are achieving your goal. As you are doing well, don’t think you can take it easy. Remember, a moment on the lips, a lifetime on the hips!",
+          "Nicely Done! You are achieving your goal. A wise man once told me the difference between a healthy diet and and unhealthy one is the willpower of the individual. Don’t flake out on me now."
+        ]
+        reply = goodArr[Math.floor(Math.random() * goodArr.length)];
+      }
+      else if (curr == goal) {
+        aveArr = [
+          "You are borderline achieving your diet. Don’t give up! Quote of the day: Chocolate cake, is always a mistake!",
+          "You are borderline achieving your diet. Enough of these cheat meals and unhealthy snacks, I know you are better than that, you superstar you."
+        ]
+        reply = aveArr[Math.floor(Math.random() * aveArr.length)];
+      }
+      else {
+        badArr = [
+          "You are not achieving your goal. It’s okay, I’m not gonna make life harder for you, I’m sure you’ve already had enough on your plate.",
+          "You are not achieving your goal. It’s okay, you are a well-rounded individual. Well-rounded.",
+          "You are not achieving your goal. Don’t take it too hard though, I’m sure this isn’t the first time you’ve failed at a healthy lifestyle.",
+          "You are not achieving your goal. Please go and take at yourself! Mirrors don’t lie; lucky for you, they don’t laugh either.",
+          "You are not achieving your goal. It’s about time I told you that there are more letters in the alphabet than KFC.",
+          "You are not achieving your goal. When I said clear all the fattening food in your fridge, I did not mean with your mouth.",
+          "You are not achieving your goal. Want that beach bod? Fat hope man. I meant that literally."
+        ]
+        reply = badArr[Math.floor(Math.random() * badArr.length)];
+      }
 
       let messageData = {
-        "text": "Your goal is " + goal + ", your current score is " + curr.toFixed(2)
+        "text": "Your goal is " + goal + ", your current score is " + curr.toFixed(2) + '\n' + reply 
       }
       module.exports.sendMessage(sender, messageData);
     })

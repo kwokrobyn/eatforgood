@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 });
 
 // Connect to Facebook
-router.get('/webhook/', (req, res) => {
+router.get('/webhook/', (req, res) => { 
 
   // Parse the query params
   let mode = req.query['hub.mode'];
@@ -192,7 +192,7 @@ router.post('/webhook/', (req, res) => {
 
     }
 
-     else {
+    else {
       // Returns a '404 Not Found' if event is not from a page subscription
       res.sendStatus(404);
     }
