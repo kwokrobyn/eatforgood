@@ -258,14 +258,22 @@ module.exports = {
   },
 
   checkToday: (sender) => {
-    const today = db.parseDate();
-    const mealRef = directdb.ref('users/' + sender + '/meals/' + today);
-    mealRef.once("value", (snapshot) => {
-        let messageData = {
-          "text": JSON.stringify(snapshot.val())
-        }
-        module.exports.sendMessage(sender, messageData);
-    });
+
+    db.getMealsOfDay(sender, (result) => {
+      let messageData = {
+        "text": JSON.stringify(result)
+      }
+      module.exports.sendMessage(sender, messageData);
+    })
+
+    // const today = db.parseDate();
+    // const mealRef = directdb.ref('users/' + sender + '/meals/' + today);
+    // mealRef.once("value", (snapshot) => {
+    //     let messageData = {
+    //       "text": JSON.stringify(snapshot.val())
+    //     }
+    //     module.exports.sendMessage(sender, messageData);
+    // });
   },
 
   checkProgress: (sender) => {
