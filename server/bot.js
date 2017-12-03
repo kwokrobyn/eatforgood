@@ -263,7 +263,7 @@ module.exports = {
       var dailyReport = "Your Meals For The Day: \n"
 
       result.forEach((child) => {
-        dailyReport.push(JSON.stringify(child.val()))
+        dailyReport += JSON.stringify(child.val())
       })
 
       // var arr = []
