@@ -34,7 +34,7 @@ module.exports = {
   addMeal: (userID, level, mealType) => {
     const date = module.exports.parseDate();
     const mealID = uuid.v4();
-    const mealRef = db.ref('users/' + userID + '/meals/' + mealID);
+    const mealRef = db.ref('users/' + userID + '/meals/' + date + '/' + mealID);
     mealRef.set({
       mealType: mealType,
       healthLevel: parseInt(level),
@@ -53,12 +53,15 @@ module.exports = {
 
   },
 
-  getMealsOfDay: (userID, cb) => {
-    const today = module.exports.parseDate();
-    const mealRef = db.ref('users/' + userID + '/meals/');
-    mealRef.orderByChild("date").equalTo(today).once("value", (snapshot) => {
-      cb(snapshot.val());
-    });
-  }
+  // getMealsOfDay: (userID, cb) => {
+  //   const today = module.exports.parseDate();
+  //   const mealRef = db.ref('users/' + userID + '/meals/');
+  //   mealRef.once("value", (snapshot) => {
+  //     snapshot.forEach((meal) => {
+  //
+  //       cb(snapshot.val());
+  //     })
+  //   });
+  // }
 
 }
