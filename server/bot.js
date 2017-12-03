@@ -268,7 +268,7 @@ module.exports = {
       }
 
       for (var i=0;i<arr.length;i++) {
-        dailyReport += JSON.stringify(result[arr[i]])
+        dailyReport += JSON.stringify(arr[i])
       }
 
       let messageData = {
