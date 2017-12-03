@@ -263,7 +263,7 @@ module.exports = {
       var dailyReport = "Your Meals For The Day: \n"
 
       result.forEach((child) => {
-        dailyReport += JSON.stringify(child.val())
+        dailyReport += JSON.stringify(child.val().mealType) + " (Score: " + JSON.stringify(child.val().healthLevel) + ")\n"
       })
 
       // var arr = []
