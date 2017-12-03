@@ -258,13 +258,14 @@ module.exports = {
   },
 
   checkToday: (sender) => {
-    db.getMealsOfDay(sender, (result) => {
-      let messageData = {
-        "text": result
-      }
-      module.exports.sendMessage(sender, messageData);
-    })
-
+    const today = module.exports.parseDate();
+    const mealRef = directdb.ref('users/' + sender + '/meals/' + today);
+    mealRef.once("value", (snapshot) => {
+        let messageData = {
+          "text": JSON.stringify(snapshot.val())
+        }
+        module.exports.sendMessage(sender, messageData);
+    });
   },
 
   checkProgress: (sender) => {
