@@ -53,15 +53,12 @@ module.exports = {
 
   },
 
-  // getMealsOfDay: (userID, cb) => {
-  //   const today = module.exports.parseDate();
-  //   const mealRef = db.ref('users/' + userID + '/meals/');
-  //   mealRef.once("value", (snapshot) => {
-  //     snapshot.forEach((meal) => {
-  //
-  //       cb(snapshot.val());
-  //     })
-  //   });
-  // }
+  getMealsOfDay: (userID, cb) => {
+    const today = module.exports.parseDate();
+    const mealRef = db.ref('users/' + userID + '/meals/' + date);
+    mealRef.once("value", (snapshot) => {
+        cb(snapshot.val());
+    });
+  }
 
 }
